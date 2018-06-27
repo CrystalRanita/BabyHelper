@@ -1,0 +1,3 @@
+/home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/release/armeabi/CMakeFiles/rebuild_cache.dir
+/home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/release/armeabi/CMakeFiles/edit_cache.dir
+/home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/release/armeabi/CMakeFiles/native-lib.dir
