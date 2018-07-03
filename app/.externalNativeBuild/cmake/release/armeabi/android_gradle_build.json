@@ -1,9 +1,9 @@
 
 {
-	"buildFiles" : [ "/home/crystal/workdir/baby/BabyHelper/app/CMakeLists.txt" ],
+	"buildFiles" : [ "/home/crystal/workdir/BabyHelper/app/CMakeLists.txt" ],
 	"cleanCommands" : 
 	[
-		"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/cmake --build /home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/release/armeabi --target clean"
+		"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/cmake --build /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/release/armeabi --target clean"
 	],
 	"cppFileExtensions" : [ "cpp" ],
 	"libraries" : 
@@ -12,18 +12,18 @@
 		{
 			"abi" : "armeabi",
 			"artifactName" : "native-lib",
-			"buildCommand" : "/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/cmake --build /home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/release/armeabi --target native-lib",
+			"buildCommand" : "/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/cmake --build /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/release/armeabi --target native-lib",
 			"buildType" : "release",
 			"files" : 
 			[
 				
 				{
 					"flags" : "  --target=armv5te-none-linux-androideabi --gcc-toolchain=/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64 --sysroot=/home/crystal/sdk/android-ndk-r15c/sysroot  -Dnative_lib_EXPORTS -isystem /home/crystal/sdk/android-ndk-r15c/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /home/crystal/sdk/android-ndk-r15c/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi/include -isystem /home/crystal/sdk/android-ndk-r15c/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -isystem /home/crystal/sdk/android-ndk-r15c/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv5te -mtune=xscale -msoft-float -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -Os -DNDEBUG  -fPIC    -c ",
-					"src" : "/home/crystal/workdir/baby/BabyHelper/app/src/main/cpp/native-lib.cpp",
-					"workingDirectory" : "/home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/release/armeabi"
+					"src" : "/home/crystal/workdir/BabyHelper/app/src/main/cpp/native-lib.cpp",
+					"workingDirectory" : "/home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/release/armeabi"
 				}
 			],
-			"output" : "/home/crystal/workdir/baby/BabyHelper/app/build/intermediates/cmake/release/obj/armeabi/libnative-lib.so",
+			"output" : "/home/crystal/workdir/BabyHelper/app/build/intermediates/cmake/release/obj/armeabi/libnative-lib.so",
 			"toolchain" : "16640542507776342707"
 		}
 	},

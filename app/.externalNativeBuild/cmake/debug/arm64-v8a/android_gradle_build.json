@@ -18,21 +18,21 @@
 			[
 				
 				{
-					"flags" : "  --target=aarch64-none-linux-android --gcc-toolchain=/home/crystal/sdk/android_ndk/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64 --sysroot=/home/crystal/sdk/android_ndk/sysroot  -Dnative_lib_EXPORTS -isystem /home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++/include -isystem /home/crystal/sdk/android_ndk/sources/android/support/include -isystem /home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++abi/include  -isystem /home/crystal/sdk/android_ndk/sysroot/usr/include/aarch64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security -std=c++11  -O0 -fno-limit-debug-info  -fPIC    -c ",
+					"flags" : "  --target=aarch64-none-linux-android --gcc-toolchain=/home/crystal/sdk/android-ndk-r15c/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64 --sysroot=/home/crystal/sdk/android-ndk-r15c/sysroot  -Dnative_lib_EXPORTS -isystem /home/crystal/sdk/android-ndk-r15c/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /home/crystal/sdk/android-ndk-r15c/sources/cxx-stl/gnu-libstdc++/4.9/libs/arm64-v8a/include -isystem /home/crystal/sdk/android-ndk-r15c/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -isystem /home/crystal/sdk/android-ndk-r15c/sysroot/usr/include/aarch64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC    -c ",
 					"src" : "/home/crystal/workdir/BabyHelper/app/src/main/cpp/native-lib.cpp",
 					"workingDirectory" : "/home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/arm64-v8a"
 				}
 			],
 			"output" : "/home/crystal/workdir/BabyHelper/app/build/intermediates/cmake/debug/obj/arm64-v8a/libnative-lib.so",
-			"toolchain" : "4770390042269131786"
+			"toolchain" : "16640542507776342707"
 		}
 	},
 	"toolchains" : 
 	{
-		"4770390042269131786" : 
+		"16640542507776342707" : 
 		{
-			"cCompilerExecutable" : "/home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/clang",
-			"cppCompilerExecutable" : "/home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++"
+			"cCompilerExecutable" : "/home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang",
+			"cppCompilerExecutable" : "/home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++"
 		}
 	}
 }

@@ -18,13 +18,13 @@
 ANDROID_ABI:UNINITIALIZED=arm64-v8a
 
 //No help, variable specified on the command line.
-ANDROID_NDK:UNINITIALIZED=/home/crystal/sdk/android_ndk
+ANDROID_NDK:UNINITIALIZED=/home/crystal/sdk/android-ndk-r15c
 
 //No help, variable specified on the command line.
 ANDROID_PLATFORM:UNINITIALIZED=android-21
 
 //Archiver
-CMAKE_AR:FILEPATH=/home/crystal/sdk/android_ndk/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-ar
+CMAKE_AR:FILEPATH=/home/crystal/sdk/android-ndk-r15c/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-ar
 
 //Flags used by the compiler during all build types.
 CMAKE_ASM_FLAGS:STRING=
@@ -56,7 +56,7 @@ CMAKE_CXX_FLAGS_RELEASE:STRING=
 CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
 //Libraries linked by default with all C++ applications.
-CMAKE_CXX_STANDARD_LIBRARIES:STRING=-latomic -lm "/home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++/libs/arm64-v8a/libc++_static.a" "/home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++/libs/arm64-v8a/libc++abi.a"
+CMAKE_CXX_STANDARD_LIBRARIES:STRING=-lm "/home/crystal/sdk/android-ndk-r15c/sources/cxx-stl/gnu-libstdc++/4.9/libs/arm64-v8a/libgnustl_static.a"
 
 //Flags used by the compiler during all build types.
 CMAKE_C_FLAGS:STRING=
@@ -75,7 +75,7 @@ CMAKE_C_FLAGS_RELEASE:STRING=
 CMAKE_C_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
 //Libraries linked by default with all C applications.
-CMAKE_C_STANDARD_LIBRARIES:STRING=-latomic -lm
+CMAKE_C_STANDARD_LIBRARIES:STRING=-lm
 
 //Flags used by the linker.
 CMAKE_EXE_LINKER_FLAGS:STRING=
@@ -102,7 +102,7 @@ CMAKE_INSTALL_PREFIX:PATH=/usr/local
 CMAKE_LIBRARY_OUTPUT_DIRECTORY:UNINITIALIZED=/home/crystal/workdir/BabyHelper/app/build/intermediates/cmake/release/obj/arm64-v8a
 
 //Path to a program.
-CMAKE_LINKER:FILEPATH=/home/crystal/sdk/android_ndk/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-ld
+CMAKE_LINKER:FILEPATH=/home/crystal/sdk/android-ndk-r15c/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-ld
 
 //No help, variable specified on the command line.
 CMAKE_MAKE_PROGRAM:UNINITIALIZED=/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja
@@ -123,19 +123,19 @@ CMAKE_MODULE_LINKER_FLAGS_RELEASE:STRING=
 CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //Path to a program.
-CMAKE_NM:FILEPATH=/home/crystal/sdk/android_ndk/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-nm
+CMAKE_NM:FILEPATH=/home/crystal/sdk/android-ndk-r15c/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-nm
 
 //Path to a program.
-CMAKE_OBJCOPY:FILEPATH=/home/crystal/sdk/android_ndk/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-objcopy
+CMAKE_OBJCOPY:FILEPATH=/home/crystal/sdk/android-ndk-r15c/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-objcopy
 
 //Path to a program.
-CMAKE_OBJDUMP:FILEPATH=/home/crystal/sdk/android_ndk/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-objdump
+CMAKE_OBJDUMP:FILEPATH=/home/crystal/sdk/android-ndk-r15c/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-objdump
 
 //Value Computed by CMake
 CMAKE_PROJECT_NAME:STATIC=Project
 
 //Ranlib
-CMAKE_RANLIB:FILEPATH=/home/crystal/sdk/android_ndk/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-ranlib
+CMAKE_RANLIB:FILEPATH=/home/crystal/sdk/android-ndk-r15c/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-ranlib
 
 //Flags used by the linker during the creation of dll's.
 CMAKE_SHARED_LINKER_FLAGS:STRING=
@@ -175,10 +175,10 @@ CMAKE_STATIC_LINKER_FLAGS_RELEASE:STRING=
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //Path to a program.
-CMAKE_STRIP:FILEPATH=/home/crystal/sdk/android_ndk/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-strip
+CMAKE_STRIP:FILEPATH=/home/crystal/sdk/android-ndk-r15c/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-strip
 
 //The CMake toolchain file
-CMAKE_TOOLCHAIN_FILE:FILEPATH=/home/crystal/sdk/android_ndk/build/cmake/android.toolchain.cmake
+CMAKE_TOOLCHAIN_FILE:FILEPATH=/home/crystal/sdk/android-ndk-r15c/build/cmake/android.toolchain.cmake
 
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
@@ -193,10 +193,10 @@ Project_BINARY_DIR:STATIC=/home/crystal/workdir/BabyHelper/app/.externalNativeBu
 Project_SOURCE_DIR:STATIC=/home/crystal/workdir/BabyHelper/app
 
 //Path to a library.
-log-lib:FILEPATH=/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm64/usr/lib/liblog.so
+log-lib:FILEPATH=/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm64/usr/lib/liblog.so
 
 //Dependencies for the target
-native-lib_LIB_DEPENDS:STATIC=general;/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm64/usr/lib/liblog.so;
+native-lib_LIB_DEPENDS:STATIC=general;/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm64/usr/lib/liblog.so;
 
 
 ########################
