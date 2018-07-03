@@ -1,59 +1,59 @@
-The target system is: Android - 21 - armv7-a
-The host system is: Linux - 4.13.0-36-generic - x86_64
+The target system is: Android - 1 - armv7-a
+The host system is: Linux - 4.13.0-41-generic - x86_64
 Determining if the C compiler works passed with the following output:
-Change Dir: /home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
+Change Dir: /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
 
-Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_ff9a8"
-[1/2] Building C object CMakeFiles/cmTC_ff9a8.dir/testCCompiler.c.o
-[2/2] Linking C executable cmTC_ff9a8
+Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_46444"
+[1/2] Building C object CMakeFiles/cmTC_46444.dir/testCCompiler.c.o
+[2/2] Linking C executable cmTC_46444
 
 
 Detecting C compiler ABI info compiled with the following output:
-Change Dir: /home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
+Change Dir: /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
 
-Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_aec6e"
-[1/2] Building C object CMakeFiles/cmTC_aec6e.dir/CMakeCCompilerABI.c.o
-[2/2] Linking C executable cmTC_aec6e
-Android clang version 5.0.300080  (based on LLVM 5.0.300080)
+Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_aca4a"
+[1/2] Building C object CMakeFiles/cmTC_aca4a.dir/CMakeCCompilerABI.c.o
+[2/2] Linking C executable cmTC_aca4a
+Android (4691093 based on r316199) clang version 6.0.2 (https://android.googlesource.com/toolchain/clang 183abd29fc496f55536e7d904e0abae47888fc7f) (https://android.googlesource.com/toolchain/llvm 34361f192e41ed6e4e8f9aca80a4ea7e9856f327) (based on LLVM 6.0.2svn)
 Target: armv7-none-linux-android
 Thread model: posix
-InstalledDir: /home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/bin
-Found candidate GCC installation: /home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x
-Selected GCC installation: /home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x
-Candidate multilib: thumb;@thumb
-Candidate multilib: armv7-a;@armv7
-Candidate multilib: armv7-a/thumb;@armv7@thumb
+InstalledDir: /home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/bin
+Found candidate GCC installation: /home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x
+Selected GCC installation: /home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x
+Candidate multilib: thumb;@mthumb
+Candidate multilib: armv7-a;@march=armv7-a
+Candidate multilib: armv7-a/thumb;@march=armv7-a@mthumb
 Candidate multilib: .;
-Selected multilib: armv7-a/thumb;@armv7@thumb
- "/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/bin/ld" --sysroot=/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm -pie -z relro -X --eh-frame-hdr -m armelf_linux_eabi -dynamic-linker /system/bin/linker -o cmTC_aec6e /home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib/crtbegin_dynamic.o -L/home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/5.0.300080/lib/linux/arm -L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb -L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb -L/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib -L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb -L/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib --exclude-libs libgcc.a --build-id --warn-shared-textrel --fatal-warnings --fix-cortex-a8 --no-undefined -z noexecstack -z relro -z now --gc-sections -z nocopyreloc CMakeFiles/cmTC_aec6e.dir/CMakeCCompilerABI.c.o -lgcc -ldl -lc -lgcc -ldl /home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib/crtend_android.o
+Selected multilib: armv7-a/thumb;@march=armv7-a@mthumb
+ "/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/bin/ld" --sysroot=/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm -pie -z relro -X --eh-frame-hdr -m armelf_linux_eabi -dynamic-linker /system/bin/linker -o cmTC_aca4a /home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib/crtbegin_dynamic.o -L/home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a -L/home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/6.0.2/lib/linux/arm -L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb -L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb -L/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib -L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb -L/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib --exclude-libs libgcc.a --exclude-libs libatomic.a --build-id --warn-shared-textrel --fatal-warnings --fix-cortex-a8 --exclude-libs libunwind.a --no-undefined -z noexecstack -z relro -z now --gc-sections -z nocopyreloc CMakeFiles/cmTC_aca4a.dir/CMakeCCompilerABI.c.o -lgcc -ldl -lc -lgcc -ldl /home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib/crtend_android.o
 
 
 Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(arm-linux-androideabi-ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_aec6e"]
-  ignore line: [[1/2] Building C object CMakeFiles/cmTC_aec6e.dir/CMakeCCompilerABI.c.o]
-  ignore line: [[2/2] Linking C executable cmTC_aec6e]
-  ignore line: [Android clang version 5.0.300080  (based on LLVM 5.0.300080)]
+  ignore line: [Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_aca4a"]
+  ignore line: [[1/2] Building C object CMakeFiles/cmTC_aca4a.dir/CMakeCCompilerABI.c.o]
+  ignore line: [[2/2] Linking C executable cmTC_aca4a]
+  ignore line: [Android (4691093 based on r316199) clang version 6.0.2 (https://android.googlesource.com/toolchain/clang 183abd29fc496f55536e7d904e0abae47888fc7f) (https://android.googlesource.com/toolchain/llvm 34361f192e41ed6e4e8f9aca80a4ea7e9856f327) (based on LLVM 6.0.2svn)]
   ignore line: [Target: armv7-none-linux-android]
   ignore line: [Thread model: posix]
-  ignore line: [InstalledDir: /home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/bin]
-  ignore line: [Found candidate GCC installation: /home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x]
-  ignore line: [Selected GCC installation: /home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x]
+  ignore line: [InstalledDir: /home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/bin]
+  ignore line: [Found candidate GCC installation: /home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x]
+  ignore line: [Selected GCC installation: /home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x]
   ignore line: [Candidate multilib: thumb]
-  ignore line: [@thumb]
+  ignore line: [@mthumb]
   ignore line: [Candidate multilib: armv7-a]
-  ignore line: [@armv7]
+  ignore line: [@march=armv7-a]
   ignore line: [Candidate multilib: armv7-a/thumb]
-  ignore line: [@armv7@thumb]
+  ignore line: [@march=armv7-a@mthumb]
   ignore line: [Candidate multilib: .]
   ignore line: []
   ignore line: [Selected multilib: armv7-a/thumb]
-  ignore line: [@armv7@thumb]
-  link line: [ "/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/bin/ld" --sysroot=/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm -pie -z relro -X --eh-frame-hdr -m armelf_linux_eabi -dynamic-linker /system/bin/linker -o cmTC_aec6e /home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib/crtbegin_dynamic.o -L/home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/5.0.300080/lib/linux/arm -L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb -L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb -L/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib -L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb -L/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib --exclude-libs libgcc.a --build-id --warn-shared-textrel --fatal-warnings --fix-cortex-a8 --no-undefined -z noexecstack -z relro -z now --gc-sections -z nocopyreloc CMakeFiles/cmTC_aec6e.dir/CMakeCCompilerABI.c.o -lgcc -ldl -lc -lgcc -ldl /home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib/crtend_android.o]
-    arg [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/bin/ld] ==> ignore
-    arg [--sysroot=/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm] ==> ignore
+  ignore line: [@march=armv7-a@mthumb]
+  link line: [ "/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/bin/ld" --sysroot=/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm -pie -z relro -X --eh-frame-hdr -m armelf_linux_eabi -dynamic-linker /system/bin/linker -o cmTC_aca4a /home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib/crtbegin_dynamic.o -L/home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a -L/home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/6.0.2/lib/linux/arm -L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb -L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb -L/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib -L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb -L/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib --exclude-libs libgcc.a --exclude-libs libatomic.a --build-id --warn-shared-textrel --fatal-warnings --fix-cortex-a8 --exclude-libs libunwind.a --no-undefined -z noexecstack -z relro -z now --gc-sections -z nocopyreloc CMakeFiles/cmTC_aca4a.dir/CMakeCCompilerABI.c.o -lgcc -ldl -lc -lgcc -ldl /home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib/crtend_android.o]
+    arg [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/bin/ld] ==> ignore
+    arg [--sysroot=/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm] ==> ignore
     arg [-pie] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-X] ==> ignore
@@ -63,54 +63,60 @@ Parsed C implicit link information from above output:
     arg [-dynamic-linker] ==> ignore
     arg [/system/bin/linker] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_aec6e] ==> ignore
-    arg [/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib/crtbegin_dynamic.o] ==> ignore
-    arg [-L/home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/5.0.300080/lib/linux/arm] ==> dir [/home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/5.0.300080/lib/linux/arm]
-    arg [-L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb] ==> dir [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb]
-    arg [-L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb] ==> dir [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb]
-    arg [-L/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib] ==> dir [/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib]
-    arg [-L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb] ==> dir [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb]
-    arg [-L/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib] ==> dir [/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib]
+    arg [cmTC_aca4a] ==> ignore
+    arg [/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib/crtbegin_dynamic.o] ==> ignore
+    arg [-L/home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a] ==> dir [/home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a]
+    arg [-L/home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/6.0.2/lib/linux/arm] ==> dir [/home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/6.0.2/lib/linux/arm]
+    arg [-L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb] ==> dir [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb]
+    arg [-L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb] ==> dir [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb]
+    arg [-L/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib] ==> dir [/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib]
+    arg [-L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb] ==> dir [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb]
+    arg [-L/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib] ==> dir [/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib]
     arg [--exclude-libs] ==> ignore
     arg [libgcc.a] ==> ignore
+    arg [--exclude-libs] ==> ignore
+    arg [libatomic.a] ==> ignore
     arg [--build-id] ==> ignore
     arg [--warn-shared-textrel] ==> ignore
     arg [--fatal-warnings] ==> ignore
     arg [--fix-cortex-a8] ==> ignore
+    arg [--exclude-libs] ==> ignore
+    arg [libunwind.a] ==> ignore
     arg [--no-undefined] ==> ignore
     arg [-znoexecstack] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-znow] ==> ignore
     arg [--gc-sections] ==> ignore
     arg [-znocopyreloc] ==> ignore
-    arg [CMakeFiles/cmTC_aec6e.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTC_aca4a.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [-ldl] ==> lib [dl]
     arg [-lc] ==> lib [c]
     arg [-lgcc] ==> lib [gcc]
     arg [-ldl] ==> lib [dl]
-    arg [/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib/crtend_android.o] ==> ignore
+    arg [/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib/crtend_android.o] ==> ignore
   remove lib [gcc]
   remove lib [gcc]
-  collapse library dir [/home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/5.0.300080/lib/linux/arm] ==> [/home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/5.0.300080/lib/linux/arm]
-  collapse library dir [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb] ==> [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb]
-  collapse library dir [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb] ==> [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/arm-linux-androideabi/lib/armv7-a/thumb]
-  collapse library dir [/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib] ==> [/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib]
-  collapse library dir [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb] ==> [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/arm-linux-androideabi/lib/armv7-a/thumb]
-  collapse library dir [/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib] ==> [/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib]
+  collapse library dir [/home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a] ==> [/home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a]
+  collapse library dir [/home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/6.0.2/lib/linux/arm] ==> [/home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/6.0.2/lib/linux/arm]
+  collapse library dir [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb] ==> [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb]
+  collapse library dir [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb] ==> [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/arm-linux-androideabi/lib/armv7-a/thumb]
+  collapse library dir [/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib] ==> [/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib]
+  collapse library dir [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb] ==> [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/arm-linux-androideabi/lib/armv7-a/thumb]
+  collapse library dir [/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib] ==> [/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib]
   implicit libs: [dl;c;dl]
-  implicit dirs: [/home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/5.0.300080/lib/linux/arm;/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb;/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/arm-linux-androideabi/lib/armv7-a/thumb;/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib]
+  implicit dirs: [/home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a;/home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/6.0.2/lib/linux/arm;/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb;/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/arm-linux-androideabi/lib/armv7-a/thumb;/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib]
   implicit fwks: []
 
 
 
 
 Detecting C [-std=c11] compiler features compiled with the following output:
-Change Dir: /home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
+Change Dir: /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
 
-Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_9e790"
-[1/2] Building C object CMakeFiles/cmTC_9e790.dir/feature_tests.c.o
-[2/2] Linking C executable cmTC_9e790
+Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_26593"
+[1/2] Building C object CMakeFiles/cmTC_26593.dir/feature_tests.c.o
+[2/2] Linking C executable cmTC_26593
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -120,11 +126,11 @@ Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/nin
 
 
 Detecting C [-std=c99] compiler features compiled with the following output:
-Change Dir: /home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
+Change Dir: /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
 
-Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_783b9"
-[1/2] Building C object CMakeFiles/cmTC_783b9.dir/feature_tests.c.o
-[2/2] Linking C executable cmTC_783b9
+Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_2a3c7"
+[1/2] Building C object CMakeFiles/cmTC_2a3c7.dir/feature_tests.c.o
+[2/2] Linking C executable cmTC_2a3c7
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -134,11 +140,11 @@ Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/nin
 
 
 Detecting C [-std=c90] compiler features compiled with the following output:
-Change Dir: /home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
+Change Dir: /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
 
-Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_067b3"
-[1/2] Building C object CMakeFiles/cmTC_067b3.dir/feature_tests.c.o
-[2/2] Linking C executable cmTC_067b3
+Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_9318e"
+[1/2] Building C object CMakeFiles/cmTC_9318e.dir/feature_tests.c.o
+[2/2] Linking C executable cmTC_9318e
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -146,59 +152,59 @@ Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/nin
     Feature record: C_FEATURE:0c_static_assert
     Feature record: C_FEATURE:0c_variadic_macros
 Determining if the CXX compiler works passed with the following output:
-Change Dir: /home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
+Change Dir: /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
 
-Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_0643c"
-[1/2] Building CXX object CMakeFiles/cmTC_0643c.dir/testCXXCompiler.cxx.o
-[2/2] Linking CXX executable cmTC_0643c
+Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_4969c"
+[1/2] Building CXX object CMakeFiles/cmTC_4969c.dir/testCXXCompiler.cxx.o
+[2/2] Linking CXX executable cmTC_4969c
 
 
 Detecting CXX compiler ABI info compiled with the following output:
-Change Dir: /home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
+Change Dir: /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
 
-Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_9ab0d"
-[1/2] Building CXX object CMakeFiles/cmTC_9ab0d.dir/CMakeCXXCompilerABI.cpp.o
-[2/2] Linking CXX executable cmTC_9ab0d
-Android clang version 5.0.300080  (based on LLVM 5.0.300080)
+Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_64abc"
+[1/2] Building CXX object CMakeFiles/cmTC_64abc.dir/CMakeCXXCompilerABI.cpp.o
+[2/2] Linking CXX executable cmTC_64abc
+Android (4691093 based on r316199) clang version 6.0.2 (https://android.googlesource.com/toolchain/clang 183abd29fc496f55536e7d904e0abae47888fc7f) (https://android.googlesource.com/toolchain/llvm 34361f192e41ed6e4e8f9aca80a4ea7e9856f327) (based on LLVM 6.0.2svn)
 Target: armv7-none-linux-android
 Thread model: posix
-InstalledDir: /home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/bin
-Found candidate GCC installation: /home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x
-Selected GCC installation: /home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x
-Candidate multilib: thumb;@thumb
-Candidate multilib: armv7-a;@armv7
-Candidate multilib: armv7-a/thumb;@armv7@thumb
+InstalledDir: /home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/bin
+Found candidate GCC installation: /home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x
+Selected GCC installation: /home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x
+Candidate multilib: thumb;@mthumb
+Candidate multilib: armv7-a;@march=armv7-a
+Candidate multilib: armv7-a/thumb;@march=armv7-a@mthumb
 Candidate multilib: .;
-Selected multilib: armv7-a/thumb;@armv7@thumb
- "/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/bin/ld" --sysroot=/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm -pie -z relro -X --eh-frame-hdr -m armelf_linux_eabi -dynamic-linker /system/bin/linker -o cmTC_9ab0d /home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib/crtbegin_dynamic.o -L/home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/5.0.300080/lib/linux/arm -L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb -L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb -L/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib -L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb -L/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib --exclude-libs libgcc.a --build-id --warn-shared-textrel --fatal-warnings --fix-cortex-a8 --no-undefined -z noexecstack -z relro -z now --gc-sections -z nocopyreloc CMakeFiles/cmTC_9ab0d.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc -lgcc -ldl -lc -lgcc -lgcc -ldl /home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib/crtend_android.o
+Selected multilib: armv7-a/thumb;@march=armv7-a@mthumb
+ "/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/bin/ld" --sysroot=/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm -pie -z relro -X --eh-frame-hdr -m armelf_linux_eabi -dynamic-linker /system/bin/linker -o cmTC_64abc /home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib/crtbegin_dynamic.o -L/home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a -L/home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/6.0.2/lib/linux/arm -L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb -L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb -L/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib -L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb -L/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib --exclude-libs libgcc.a --exclude-libs libatomic.a --build-id --warn-shared-textrel --fatal-warnings --fix-cortex-a8 --exclude-libs libunwind.a --no-undefined -z noexecstack -z relro -z now --gc-sections -z nocopyreloc CMakeFiles/cmTC_64abc.dir/CMakeCXXCompilerABI.cpp.o -lm -lgcc -lgcc -ldl -lc -lgcc -lgcc -ldl /home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib/crtend_android.o
 
 
 Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(arm-linux-androideabi-ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_9ab0d"]
-  ignore line: [[1/2] Building CXX object CMakeFiles/cmTC_9ab0d.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [[2/2] Linking CXX executable cmTC_9ab0d]
-  ignore line: [Android clang version 5.0.300080  (based on LLVM 5.0.300080)]
+  ignore line: [Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_64abc"]
+  ignore line: [[1/2] Building CXX object CMakeFiles/cmTC_64abc.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [[2/2] Linking CXX executable cmTC_64abc]
+  ignore line: [Android (4691093 based on r316199) clang version 6.0.2 (https://android.googlesource.com/toolchain/clang 183abd29fc496f55536e7d904e0abae47888fc7f) (https://android.googlesource.com/toolchain/llvm 34361f192e41ed6e4e8f9aca80a4ea7e9856f327) (based on LLVM 6.0.2svn)]
   ignore line: [Target: armv7-none-linux-android]
   ignore line: [Thread model: posix]
-  ignore line: [InstalledDir: /home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/bin]
-  ignore line: [Found candidate GCC installation: /home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x]
-  ignore line: [Selected GCC installation: /home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x]
+  ignore line: [InstalledDir: /home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/bin]
+  ignore line: [Found candidate GCC installation: /home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x]
+  ignore line: [Selected GCC installation: /home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x]
   ignore line: [Candidate multilib: thumb]
-  ignore line: [@thumb]
+  ignore line: [@mthumb]
   ignore line: [Candidate multilib: armv7-a]
-  ignore line: [@armv7]
+  ignore line: [@march=armv7-a]
   ignore line: [Candidate multilib: armv7-a/thumb]
-  ignore line: [@armv7@thumb]
+  ignore line: [@march=armv7-a@mthumb]
   ignore line: [Candidate multilib: .]
   ignore line: []
   ignore line: [Selected multilib: armv7-a/thumb]
-  ignore line: [@armv7@thumb]
-  link line: [ "/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/bin/ld" --sysroot=/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm -pie -z relro -X --eh-frame-hdr -m armelf_linux_eabi -dynamic-linker /system/bin/linker -o cmTC_9ab0d /home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib/crtbegin_dynamic.o -L/home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/5.0.300080/lib/linux/arm -L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb -L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb -L/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib -L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb -L/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib --exclude-libs libgcc.a --build-id --warn-shared-textrel --fatal-warnings --fix-cortex-a8 --no-undefined -z noexecstack -z relro -z now --gc-sections -z nocopyreloc CMakeFiles/cmTC_9ab0d.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc -lgcc -ldl -lc -lgcc -lgcc -ldl /home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib/crtend_android.o]
-    arg [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/bin/ld] ==> ignore
-    arg [--sysroot=/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm] ==> ignore
+  ignore line: [@march=armv7-a@mthumb]
+  link line: [ "/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/bin/ld" --sysroot=/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm -pie -z relro -X --eh-frame-hdr -m armelf_linux_eabi -dynamic-linker /system/bin/linker -o cmTC_64abc /home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib/crtbegin_dynamic.o -L/home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a -L/home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/6.0.2/lib/linux/arm -L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb -L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb -L/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib -L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb -L/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib --exclude-libs libgcc.a --exclude-libs libatomic.a --build-id --warn-shared-textrel --fatal-warnings --fix-cortex-a8 --exclude-libs libunwind.a --no-undefined -z noexecstack -z relro -z now --gc-sections -z nocopyreloc CMakeFiles/cmTC_64abc.dir/CMakeCXXCompilerABI.cpp.o -lm -lgcc -lgcc -ldl -lc -lgcc -lgcc -ldl /home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib/crtend_android.o]
+    arg [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/bin/ld] ==> ignore
+    arg [--sysroot=/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm] ==> ignore
     arg [-pie] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-X] ==> ignore
@@ -208,28 +214,32 @@ Parsed CXX implicit link information from above output:
     arg [-dynamic-linker] ==> ignore
     arg [/system/bin/linker] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_9ab0d] ==> ignore
-    arg [/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib/crtbegin_dynamic.o] ==> ignore
-    arg [-L/home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/5.0.300080/lib/linux/arm] ==> dir [/home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/5.0.300080/lib/linux/arm]
-    arg [-L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb] ==> dir [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb]
-    arg [-L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb] ==> dir [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb]
-    arg [-L/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib] ==> dir [/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib]
-    arg [-L/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb] ==> dir [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb]
-    arg [-L/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib] ==> dir [/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib]
+    arg [cmTC_64abc] ==> ignore
+    arg [/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib/crtbegin_dynamic.o] ==> ignore
+    arg [-L/home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a] ==> dir [/home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a]
+    arg [-L/home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/6.0.2/lib/linux/arm] ==> dir [/home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/6.0.2/lib/linux/arm]
+    arg [-L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb] ==> dir [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb]
+    arg [-L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb] ==> dir [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb]
+    arg [-L/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib] ==> dir [/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib]
+    arg [-L/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb] ==> dir [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb]
+    arg [-L/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib] ==> dir [/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib]
     arg [--exclude-libs] ==> ignore
     arg [libgcc.a] ==> ignore
+    arg [--exclude-libs] ==> ignore
+    arg [libatomic.a] ==> ignore
     arg [--build-id] ==> ignore
     arg [--warn-shared-textrel] ==> ignore
     arg [--fatal-warnings] ==> ignore
     arg [--fix-cortex-a8] ==> ignore
+    arg [--exclude-libs] ==> ignore
+    arg [libunwind.a] ==> ignore
     arg [--no-undefined] ==> ignore
     arg [-znoexecstack] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-znow] ==> ignore
     arg [--gc-sections] ==> ignore
     arg [-znocopyreloc] ==> ignore
-    arg [CMakeFiles/cmTC_9ab0d.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
-    arg [-lstdc++] ==> lib [stdc++]
+    arg [CMakeFiles/cmTC_64abc.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lm] ==> lib [m]
     arg [-lgcc] ==> lib [gcc]
     arg [-lgcc] ==> lib [gcc]
@@ -238,30 +248,31 @@ Parsed CXX implicit link information from above output:
     arg [-lgcc] ==> lib [gcc]
     arg [-lgcc] ==> lib [gcc]
     arg [-ldl] ==> lib [dl]
-    arg [/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib/crtend_android.o] ==> ignore
+    arg [/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib/crtend_android.o] ==> ignore
   remove lib [gcc]
   remove lib [gcc]
   remove lib [gcc]
   remove lib [gcc]
-  collapse library dir [/home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/5.0.300080/lib/linux/arm] ==> [/home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/5.0.300080/lib/linux/arm]
-  collapse library dir [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb] ==> [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb]
-  collapse library dir [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb] ==> [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/arm-linux-androideabi/lib/armv7-a/thumb]
-  collapse library dir [/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib/../lib] ==> [/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib]
-  collapse library dir [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb] ==> [/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/arm-linux-androideabi/lib/armv7-a/thumb]
-  collapse library dir [/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib] ==> [/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib]
-  implicit libs: [stdc++;m;dl;c;dl]
-  implicit dirs: [/home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/5.0.300080/lib/linux/arm;/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb;/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/arm-linux-androideabi/lib/armv7-a/thumb;/home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm/usr/lib]
+  collapse library dir [/home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a] ==> [/home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a]
+  collapse library dir [/home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/6.0.2/lib/linux/arm] ==> [/home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/6.0.2/lib/linux/arm]
+  collapse library dir [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb] ==> [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb]
+  collapse library dir [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/../lib/armv7-a/thumb] ==> [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/arm-linux-androideabi/lib/armv7-a/thumb]
+  collapse library dir [/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib/../lib] ==> [/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib]
+  collapse library dir [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/lib/armv7-a/thumb] ==> [/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/arm-linux-androideabi/lib/armv7-a/thumb]
+  collapse library dir [/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib] ==> [/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib]
+  implicit libs: [m;dl;c;dl]
+  implicit dirs: [/home/crystal/sdk/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a;/home/crystal/sdk/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/6.0.2/lib/linux/arm;/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/armv7-a/thumb;/home/crystal/sdk/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/arm-linux-androideabi/lib/armv7-a/thumb;/home/crystal/sdk/android_ndk/platforms/android-21/arch-arm/usr/lib]
   implicit fwks: []
 
 
 
 
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
-Change Dir: /home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
+Change Dir: /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
 
-Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_b8bf4"
-[1/2] Building CXX object CMakeFiles/cmTC_b8bf4.dir/feature_tests.cxx.o
-[2/2] Linking CXX executable cmTC_b8bf4
+Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_2d20a"
+[1/2] Building CXX object CMakeFiles/cmTC_2d20a.dir/feature_tests.cxx.o
+[2/2] Linking CXX executable cmTC_2d20a
 
 
     Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
@@ -324,11 +335,11 @@ Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/nin
 
 
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
-Change Dir: /home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
+Change Dir: /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
 
-Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_cf817"
-[1/2] Building CXX object CMakeFiles/cmTC_cf817.dir/feature_tests.cxx.o
-[2/2] Linking CXX executable cmTC_cf817
+Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_97dea"
+[1/2] Building CXX object CMakeFiles/cmTC_97dea.dir/feature_tests.cxx.o
+[2/2] Linking CXX executable cmTC_97dea
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
@@ -391,11 +402,11 @@ Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/nin
 
 
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
-Change Dir: /home/crystal/workdir/baby/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
+Change Dir: /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
 
-Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_bddf2"
-[1/2] Building CXX object CMakeFiles/cmTC_bddf2.dir/feature_tests.cxx.o
-[2/2] Linking CXX executable cmTC_bddf2
+Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_367dc"
+[1/2] Building CXX object CMakeFiles/cmTC_367dc.dir/feature_tests.cxx.o
+[2/2] Linking CXX executable cmTC_367dc
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
