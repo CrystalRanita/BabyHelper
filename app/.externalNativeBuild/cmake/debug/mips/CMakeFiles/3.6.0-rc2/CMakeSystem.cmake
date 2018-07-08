@@ -1,6 +1,6 @@
-set(CMAKE_HOST_SYSTEM "Linux-4.13.0-41-generic")
+set(CMAKE_HOST_SYSTEM "Linux-4.13.0-45-generic")
 set(CMAKE_HOST_SYSTEM_NAME "Linux")
-set(CMAKE_HOST_SYSTEM_VERSION "4.13.0-41-generic")
+set(CMAKE_HOST_SYSTEM_VERSION "4.13.0-45-generic")
 set(CMAKE_HOST_SYSTEM_PROCESSOR "x86_64")
 
 include("/home/crystal/sdk/android-ndk-r15c/build/cmake/android.toolchain.cmake")

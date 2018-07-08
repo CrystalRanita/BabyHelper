@@ -1,24 +1,6 @@
 
   const char features[] = {"\n"
 "CXX_FEATURE:"
-#if ((__clang_major__ * 100) + __clang_minor__) >= 304 && __cplusplus >= 201103L
-"1"
-#else
-"0"
-#endif
-"cxx_variadic_macros\n"
-"CXX_FEATURE:"
-#if ((__clang_major__ * 100) + __clang_minor__) >= 304 && __has_feature(cxx_variadic_templates)
-"1"
-#else
-"0"
-#endif
-"cxx_variadic_templates\n"
-
-};
-
-int main(int argc, char** argv) { (void)argv; return features[argc]; }
-"CXX_FEATURE:"
 #if ((__clang_major__ * 100) + __clang_minor__) >= 304 && __has_feature(cxx_aggregate_nsdmi)
 "1"
 #else

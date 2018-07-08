@@ -1,9 +1,9 @@
 
 {
-	"buildFiles" : [ "/home/crystal/workdir/BabyHelper/app/CMakeLists.txt" ],
+	"buildFiles" : [ "/home/crystal/workdir/android_src/BabyHelper/app/CMakeLists.txt" ],
 	"cleanCommands" : 
 	[
-		"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/cmake --build /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/x86 --target clean"
+		"/home/crystal/sdk/android_sdk/cmake/3.6.4111459/bin/cmake --build /home/crystal/workdir/android_src/BabyHelper/app/.externalNativeBuild/cmake/debug/x86 --target clean"
 	],
 	"cppFileExtensions" : [ "cpp" ],
 	"libraries" : 
@@ -12,18 +12,18 @@
 		{
 			"abi" : "x86",
 			"artifactName" : "native-lib",
-			"buildCommand" : "/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/cmake --build /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/x86 --target native-lib",
+			"buildCommand" : "/home/crystal/sdk/android_sdk/cmake/3.6.4111459/bin/cmake --build /home/crystal/workdir/android_src/BabyHelper/app/.externalNativeBuild/cmake/debug/x86 --target native-lib",
 			"buildType" : "debug",
 			"files" : 
 			[
 				
 				{
 					"flags" : "  --target=i686-none-linux-android --gcc-toolchain=/home/crystal/sdk/android-ndk-r15c/toolchains/x86-4.9/prebuilt/linux-x86_64 --sysroot=/home/crystal/sdk/android-ndk-r15c/sysroot  -Dnative_lib_EXPORTS -isystem /home/crystal/sdk/android-ndk-r15c/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /home/crystal/sdk/android-ndk-r15c/sources/cxx-stl/gnu-libstdc++/4.9/libs/x86/include -isystem /home/crystal/sdk/android-ndk-r15c/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -isystem /home/crystal/sdk/android-ndk-r15c/sysroot/usr/include/i686-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -Wa,--noexecstack -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC    -c ",
-					"src" : "/home/crystal/workdir/BabyHelper/app/src/main/cpp/native-lib.cpp",
-					"workingDirectory" : "/home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/x86"
+					"src" : "/home/crystal/workdir/android_src/BabyHelper/app/src/main/cpp/native-lib.cpp",
+					"workingDirectory" : "/home/crystal/workdir/android_src/BabyHelper/app/.externalNativeBuild/cmake/debug/x86"
 				}
 			],
-			"output" : "/home/crystal/workdir/BabyHelper/app/build/intermediates/cmake/debug/obj/x86/libnative-lib.so",
+			"output" : "/home/crystal/workdir/android_src/BabyHelper/app/build/intermediates/cmake/debug/obj/x86/libnative-lib.so",
 			"toolchain" : "16640542507776342707"
 		}
 	},

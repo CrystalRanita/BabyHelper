@@ -1,3 +1,3 @@
-/home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/release/x86/CMakeFiles/rebuild_cache.dir
-/home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/release/x86/CMakeFiles/edit_cache.dir
-/home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/release/x86/CMakeFiles/native-lib.dir
+/home/crystal/workdir/android_src/BabyHelper/app/.externalNativeBuild/cmake/release/x86/CMakeFiles/rebuild_cache.dir
+/home/crystal/workdir/android_src/BabyHelper/app/.externalNativeBuild/cmake/release/x86/CMakeFiles/edit_cache.dir
+/home/crystal/workdir/android_src/BabyHelper/app/.externalNativeBuild/cmake/release/x86/CMakeFiles/native-lib.dir

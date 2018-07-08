@@ -42,7 +42,7 @@ rule CXX_SHARED_LIBRARY_LINKER__native-lib
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/cmake -H/home/crystal/workdir/BabyHelper/app -B/home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/x86
+  command = /home/crystal/sdk/android_sdk/cmake/3.6.4111459/bin/cmake -H/home/crystal/workdir/android_src/BabyHelper/app -B/home/crystal/workdir/android_src/BabyHelper/app/.externalNativeBuild/cmake/debug/x86
   description = Re-running CMake...
   generator = 1
 
@@ -51,7 +51,7 @@ rule RERUN_CMAKE
 # Rule for cleaning all built files.
 
 rule CLEAN
-  command = /home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja -t clean
+  command = /home/crystal/sdk/android_sdk/cmake/3.6.4111459/bin/ninja -t clean
   description = Cleaning all built files...
 
 
@@ -59,6 +59,6 @@ rule CLEAN
 # Rule for printing all primary targets available.
 
 rule HELP
-  command = /home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja -t targets
+  command = /home/crystal/sdk/android_sdk/cmake/3.6.4111459/bin/ninja -t targets
   description = All primary targets available:
 

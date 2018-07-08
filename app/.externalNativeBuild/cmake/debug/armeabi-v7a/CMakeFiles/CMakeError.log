@@ -1,12 +1,12 @@
-Detecting CXX [-std=c++98] compiler features failed to compile with the following output:
-Change Dir: /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
+Detecting CXX [-std=c++11] compiler features failed to compile with the following output:
+Change Dir: /home/crystal/workdir/android_src/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/CMakeTmp
 
-Run Build Command:"/home/crystal/sdk/android-sdk-linux/cmake/3.6.4111459/bin/ninja" "cmTC_c5cae"
-[1/2] Building CXX object CMakeFiles/cmTC_c5cae.dir/feature_tests.cxx.o
-FAILED: /home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++  --target=armv7-none-linux-androideabi --gcc-toolchain=/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64 --sysroot=/home/crystal/sdk/android-ndk-r15c/sysroot   -isystem /home/crystal/sdk/android-ndk-r15c/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /home/crystal/sdk/android-ndk-r15c/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /home/crystal/sdk/android-ndk-r15c/sources/cxx-stl/gnu-libstdc++/4.9/include/backward -isystem /home/crystal/sdk/android-ndk-r15c/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security    -fPIE   -std=c++98 -o CMakeFiles/cmTC_c5cae.dir/feature_tests.cxx.o -c /home/crystal/workdir/BabyHelper/app/.externalNativeBuild/cmake/debug/armeabi-v7a/CMakeFiles/feature_tests.cxx
-Assembler messages:
-Fatal error: can't create CMakeFiles/cmTC_c5cae.dir/feature_tests.cxx.o: No such file or directory
-clang++: error: assembler command failed with exit code 1 (use -v to see invocation)
+Run Build Command:"/home/crystal/sdk/android_sdk/cmake/3.6.4111459/bin/ninja" "cmTC_d79c6"
+[1/2] Building CXX object CMakeFiles/cmTC_d79c6.dir/feature_tests.cxx.o
+[2/2] Linking CXX executable cmTC_d79c6
+FAILED: : && /home/crystal/sdk/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++  --target=armv7-none-linux-androideabi --gcc-toolchain=/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64 --sysroot=/home/crystal/sdk/android-ndk-r15c/sysroot  -isystem /home/crystal/sdk/android-ndk-r15c/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Wl,--exclude-libs,libgcc.a --sysroot /home/crystal/sdk/android-ndk-r15c/platforms/android-21/arch-arm -Wl,--build-id -Wl,--warn-shared-textrel -Wl,--fatal-warnings -Wl,--fix-cortex-a8 -Wl,--no-undefined -Wl,-z,noexecstack -Qunused-arguments -Wl,-z,relro -Wl,-z,now -Wl,--gc-sections -Wl,-z,nocopyreloc -pie -fPIE CMakeFiles/cmTC_d79c6.dir/feature_tests.cxx.o  -o cmTC_d79c6  -lm "/home/crystal/sdk/android-ndk-r15c/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/libgnustl_static.a" && :
+/home/crystal/sdk/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/bin/ld: fatal error: cmTC_d79c6: open: No such file or directory
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
 ninja: build stopped: subcommand failed.
 
 

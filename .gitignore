@@ -1,3 +1,7 @@
 build
 app/build
 .idea
+app/.externalNativeBuild
+openCVLibrary341
+.gradle
+.gradle/4.1/fileHashes/fileHashes.lock
