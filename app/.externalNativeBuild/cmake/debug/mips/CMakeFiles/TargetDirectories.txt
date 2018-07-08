@@ -1,3 +1,0 @@
-/home/crystal/workdir/android_src/BabyHelper/app/.externalNativeBuild/cmake/debug/mips/CMakeFiles/rebuild_cache.dir
-/home/crystal/workdir/android_src/BabyHelper/app/.externalNativeBuild/cmake/debug/mips/CMakeFiles/edit_cache.dir
-/home/crystal/workdir/android_src/BabyHelper/app/.externalNativeBuild/cmake/debug/mips/CMakeFiles/native-lib.dir
