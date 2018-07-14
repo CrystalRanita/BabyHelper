@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">醫生幫手</string>
+    <string name="ip_cannot_be_empty">請填寫IP。</string>
+    <string name="user_cannot_be_empty">請填寫使用者名稱。</string>
+    <string name="video_file_not_found">找不到影像檔!</string>
+    <string name="info_file_not_found">找不到影像資訊檔。</string>
+    <string name="please_select_mp4">請選擇 Mp4 檔案</string>
+    <string name="chk_storage_failed">使用此應用必須先允許儲存權限！</string>
+    <string name="navigation_drawer_open">開啟選單</string>
+    <string name="navigation_drawer_close">關閉選單</string>
+    <string name="nav_header_title">您好,</string>
+    <string name="nav_header_subtitle">歡迎使用</string>
+    <string name="nav_header_desc">寶寶幫手</string>
+    <string name="action_settings">設定</string>
+    <string name="action_about">關於</string>
+    <string name="input_user_name_hint">請輸入使用者名稱！</string>
+    <string name="input_ip_hint">請輸入IP!</string>
+    <string name="input_info">請輸入資訊</string>
+    <string name="ok">確定</string>
+    <string name="cancel">取消</string>
+    <string name="upload">上傳</string>
+    <string name="choose_video">選擇影像檔</string>
+</resources>
