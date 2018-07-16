@@ -5,6 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -18,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -35,6 +39,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.UUID;
 
+import org.bytedeco.javacpp.opencv_core.Mat;
+import org.bytedeco.javacpp.opencv_core.IplImage;
+import org.bytedeco.javacv.AndroidFrameConverter;
+import org.bytedeco.javacv.FFmpegFrameGrabber;
+import org.bytedeco.javacv.Frame;
+import org.bytedeco.javacv.OpenCVFrameConverter;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = MainActivity.class.getName();
@@ -45,10 +56,13 @@ public class MainActivity extends AppCompatActivity
     private EditText ipEditText;
     private EditText userEditText;
     private NavigationView nvView;
+    private ImageView drawView;
 
-    private Uri filePath;
+    private Uri mFilePath;
     private String infoFilePath;
     private UploadFileReceiver mUploadReceiver = null;
+    private static OpenCVFrameConverter.ToIplImage mConverter = new OpenCVFrameConverter.ToIplImage();
+    AndroidFrameConverter mAndroidConverter = new AndroidFrameConverter();
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -75,6 +89,9 @@ public class MainActivity extends AppCompatActivity
 
         nvView = (NavigationView) findViewById(R.id.nav_view);
         nvView.setItemIconTintList(null);
+
+        drawView = (ImageView) findViewById(R.id.drawView);
+
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,16 +198,16 @@ public class MainActivity extends AppCompatActivity
         UPLOAD_URL = "http://" + ip + "/dashboard/php/connect.php";
         String info_path = infoFilePath;
 
-        if (filePath == null) {
+        if (mFilePath == null) {
             Toast.makeText(this, R.string.video_file_not_found, Toast.LENGTH_LONG).show();
             return;
         }
 
-        String path = trimStart(filePath.getPath(), "/file");
+        String path = trimStart(mFilePath.getPath(), "/file");
 
         Log.i(TAG ,"name: " + name);
         //getting the actual path of the image
-        Log.i(TAG ,"filePath: " + filePath);
+        Log.i(TAG ,"filePath: " + mFilePath);
         Log.i(TAG ,"URI path: " + path);
         Log.i(TAG ,"info_path: " + info_path);
 
@@ -257,8 +274,9 @@ public class MainActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == Constants.REQ_CHOOSE_VIDEO && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            filePath = data.getData();
+            mFilePath = data.getData();
             infoFilePath = createVideoInfoFile("video_info.txt", "test");
+            getFrame();
         }
     }
 
@@ -282,6 +300,38 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    private void fetchFrame(String videofile) throws Exception {
+        long start = System.currentTimeMillis();
+        // File targetFile = new File(framefile);
+        FFmpegFrameGrabber fGrabber = new FFmpegFrameGrabber(videofile);
+        fGrabber.start();
+        int length = fGrabber.getLengthInFrames();
+        int i = 0;
+        int remove_frame_count = 30;
+        Frame detected_frame = null;
+        while (i < length) {
+            detected_frame = fGrabber.grabFrame();
+
+            if ((i > remove_frame_count) && (detected_frame.image != null)) {
+                break;
+            }
+            i++;
+        }
+
+        Bitmap originalBitmap = mAndroidConverter.convert(detected_frame);
+        drawView.setImageDrawable(new BitmapDrawable(getResources(), originalBitmap));
+        fGrabber.stop();
+    }
+
+    private void getFrame() {
+        try {
+            String path = trimStart(mFilePath.getPath(), "/file");
+            Log.i(TAG ,"filePath: " + mFilePath);
+            fetchFrame(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
