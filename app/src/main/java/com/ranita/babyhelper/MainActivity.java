@@ -1,11 +1,13 @@
 package com.ranita.babyhelper;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
@@ -118,6 +120,33 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Draw
+        Constants.resetAllPotition(getApplicationContext());
+        Constants.setBoolSharedPref(Constants.RGB_SET_ALL, false, getApplicationContext());
+        final DragRectView view = (DragRectView) findViewById(R.id.dragRect);
+
+        if (null != view) {
+            view.setOnUpCallback(new DragRectView.OnUpCallback() {
+                @Override
+                public void onRectFinished(final Rect rect) {
+//                    if(!Constants.getBoolSharedPref(Constants.RGB_SET_ALL, getApplicationContext())) {
+//                        Toast.makeText(getApplicationContext(), "Rect is (" + rect.left + ", " + rect.top + ", " + rect.right + ", " + rect.bottom + ")",
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+                    if (Constants.getPosition(getApplicationContext(), "G").left() == -1) {
+                        Log.i("Main", "set G");
+                        Constants.setPosition(getApplicationContext(), "G", rect.left, rect.top, rect.right, rect.bottom);
+                    } else if (Constants.getPosition(getApplicationContext(), "R").left() == -1) {
+                        Log.i("Main", "set R");
+                        Constants.setPosition(getApplicationContext(), "R", rect.left, rect.top, rect.right, rect.bottom);
+                    } else if (Constants.getPosition(getApplicationContext(), "B").left() == -1) {
+                        Log.i("Main", "set B");
+                        Constants.setPosition(getApplicationContext(), "B", rect.left, rect.top, rect.right, rect.bottom);
+                        Constants.setBoolSharedPref(Constants.RGB_SET_ALL, true, getApplicationContext());
+                    }
+                }
+            });
+        }
         // Example of a call to a native method
         // TextView tv = (TextView) findViewById(R.id.sample_text);
         // tv.setText(stringFromJNI());
@@ -325,6 +354,8 @@ public class MainActivity extends AppCompatActivity
 
     private void getFrame() {
         try {
+            Constants.resetAllPotition(getApplicationContext());
+            Constants.setBoolSharedPref(Constants.RGB_SET_ALL, false, getApplicationContext());
             String path = trimStart(mFilePath.getPath(), "/file");
             Log.i(TAG ,"filePath: " + mFilePath);
             fetchFrame(path);
