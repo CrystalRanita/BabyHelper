@@ -5,3 +5,5 @@ app/.externalNativeBuild
 .gradle
 .gradle/4.1/fileHashes/fileHashes.lock
 openCVLibrary341
+app/app.iml
+openCVLibrary341/openCVLibrary341.iml
