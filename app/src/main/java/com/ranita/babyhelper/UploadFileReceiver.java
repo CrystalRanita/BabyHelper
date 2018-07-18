@@ -20,7 +20,7 @@ public class UploadFileReceiver extends UploadServiceBroadcastReceiver {
 
     @Override
     public void onCompleted(Context context, UploadInfo uploadInfo, ServerResponse serverResponse) {
-        Log.d(TAG, "onCompleted");
+        Log.d(TAG, "onCompleted, uploadInfo: " + uploadInfo.getUploadId() + ", server resp: " + serverResponse);
     }
 
     @Override
