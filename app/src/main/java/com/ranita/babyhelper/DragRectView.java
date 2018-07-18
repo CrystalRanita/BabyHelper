@@ -25,7 +25,6 @@ public class DragRectView extends View{
     private int mEndX = 0;
     private int mEndY = 0;
     private boolean mDrawRect = false;
-    private TextPaint mTextPaint = null;
 
     private OnUpCallback mCallback = null;
 
@@ -70,10 +69,6 @@ public class DragRectView extends View{
         mRectPaint.setColor(Color.YELLOW);
         mRectPaint.setStyle(Paint.Style.STROKE);
         mRectPaint.setStrokeWidth(5); // TODO: should take from resources
-
-        mTextPaint = new TextPaint();
-        mTextPaint.setColor(getContext().getResources().getColor(android.R.color.holo_green_light));
-        mTextPaint.setTextSize(20);
     }
 
     @Override
@@ -127,8 +122,6 @@ public class DragRectView extends View{
                         Math.max(mEndX, mStartX),
                         Math.max(mEndY, mStartY),
                         mRectPaint);
-                canvas.drawText("  (" + Math.abs(mStartX - mEndX) + ", " + Math.abs(mStartY - mEndY) + ")",
-                        Math.max(mEndX, mStartX), Math.max(mEndY, mStartY), mTextPaint);
             }
         }
 

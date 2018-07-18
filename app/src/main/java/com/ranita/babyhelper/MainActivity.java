@@ -21,9 +21,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -52,19 +55,26 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = MainActivity.class.getName();
     public static String UPLOAD_URL;
+    private Context mContext;
 
     private Button btnChoose;
     private Button btnUpload;
     private EditText ipEditText;
     private EditText userEditText;
     private NavigationView nvView;
-    private ImageView drawView;
+    private ImageView mDrawImg;
+    private DrawerLayout mDrawerLayout;
+    private DragRectView mDragRectView;
 
     private Uri mFilePath;
     private String infoFilePath;
     private UploadFileReceiver mUploadReceiver = null;
     private static OpenCVFrameConverter.ToIplImage mConverter = new OpenCVFrameConverter.ToIplImage();
     AndroidFrameConverter mAndroidConverter = new AndroidFrameConverter();
+
+    // Actual img size
+    private static int mScreenActualImgHeight = 0;
+    private static int mScreenActualImgWidth = 0;
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -75,6 +85,8 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mContext = getApplicationContext();
+
         mUploadReceiver = new UploadFileReceiver();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constants.UPLOAD_FILE_RECEIVER_NAME);
@@ -92,7 +104,7 @@ public class MainActivity extends AppCompatActivity
         nvView = (NavigationView) findViewById(R.id.nav_view);
         nvView.setItemIconTintList(null);
 
-        drawView = (ImageView) findViewById(R.id.drawView);
+        mDrawImg = (ImageView) findViewById(R.id.drawImg);
 
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,42 +123,41 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // Draw
-        Constants.resetAllPotition(getApplicationContext());
-        Constants.setBoolSharedPref(Constants.RGB_SET_ALL, false, getApplicationContext());
-        final DragRectView view = (DragRectView) findViewById(R.id.dragRect);
+        mDragRectView = (DragRectView) findViewById(R.id.dragRect);
 
-        if (null != view) {
-            view.setOnUpCallback(new DragRectView.OnUpCallback() {
+        if (null != mDragRectView) {
+            mDragRectView.setOnUpCallback(new DragRectView.OnUpCallback() {
                 @Override
                 public void onRectFinished(final Rect rect) {
-//                    if(!Constants.getBoolSharedPref(Constants.RGB_SET_ALL, getApplicationContext())) {
-//                        Toast.makeText(getApplicationContext(), "Rect is (" + rect.left + ", " + rect.top + ", " + rect.right + ", " + rect.bottom + ")",
+//                    if(!Constants.getBoolSharedPref(Constants.RGB_SET_ALL, mContext)) {
+//                        Toast.makeText(mContext, "Rect is (" + rect.left + ", " + rect.top + ", " + rect.right + ", " + rect.bottom + ")",
 //                                Toast.LENGTH_SHORT).show();
 //                    }
-                    if (Constants.getPosition(getApplicationContext(), "G").left() == -1) {
+                    if (Constants.getPosition(mContext, "G").left() == -1) {
                         Log.i("Main", "set G");
-                        Constants.setPosition(getApplicationContext(), "G", rect.left, rect.top, rect.right, rect.bottom);
-                    } else if (Constants.getPosition(getApplicationContext(), "R").left() == -1) {
+                        Constants.setPosition(mContext, "G", rect.left, rect.top, rect.right, rect.bottom);
+                    } else if (Constants.getPosition(mContext, "R").left() == -1) {
                         Log.i("Main", "set R");
-                        Constants.setPosition(getApplicationContext(), "R", rect.left, rect.top, rect.right, rect.bottom);
-                    } else if (Constants.getPosition(getApplicationContext(), "B").left() == -1) {
+                        Constants.setPosition(mContext, "R", rect.left, rect.top, rect.right, rect.bottom);
+                    } else if (Constants.getPosition(mContext, "B").left() == -1) {
                         Log.i("Main", "set B");
-                        Constants.setPosition(getApplicationContext(), "B", rect.left, rect.top, rect.right, rect.bottom);
-                        Constants.setBoolSharedPref(Constants.RGB_SET_ALL, true, getApplicationContext());
+                        Constants.setPosition(mContext, "B", rect.left, rect.top, rect.right, rect.bottom);
+                        Constants.setBoolSharedPref(Constants.RGB_SET_ALL, true, mContext);
                     }
                 }
             });
         }
+
         // Example of a call to a native method
         // TextView tv = (TextView) findViewById(R.id.sample_text);
         // tv.setText(stringFromJNI());
@@ -170,16 +181,16 @@ public class MainActivity extends AppCompatActivity
         builder.setView(view);
         final EditText user_edittext = (EditText) view.findViewById(R.id.userEditText);
         final EditText ip_edittext = (EditText) view.findViewById(R.id.ipEditText);
-        user_edittext.setText(Constants.getSharedPref(Constants.INPUT_USER, getApplicationContext()));
-        ip_edittext.setText(Constants.getSharedPref(Constants.INPUT_IP, getApplicationContext()));
+        user_edittext.setText(Constants.getSharedPref(Constants.INPUT_USER, mContext));
+        ip_edittext.setText(Constants.getSharedPref(Constants.INPUT_IP, mContext));
         builder.setTitle(getResources().getString(R.string.input_info));
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 String user_val = user_edittext.getText().toString();
                 String ip_val = ip_edittext.getText().toString();
-                Constants.setSharedPref(Constants.INPUT_USER, user_val, getApplicationContext());
-                Constants.setSharedPref(Constants.INPUT_IP, ip_val, getApplicationContext());
+                Constants.setSharedPref(Constants.INPUT_USER, user_val, mContext);
+                Constants.setSharedPref(Constants.INPUT_IP, ip_val, mContext);
             }
         })
                 .setNegativeButton(R.string.cancel, null);
@@ -222,8 +233,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void sendVideo() {
-        String name = Constants.getSharedPref(Constants.INPUT_USER, getApplicationContext()).trim();
-        String ip = Constants.getSharedPref(Constants.INPUT_IP, getApplicationContext()).trim();
+        String name = Constants.getSharedPref(Constants.INPUT_USER, mContext).trim();
+        String ip = Constants.getSharedPref(Constants.INPUT_IP, mContext).trim();
         UPLOAD_URL = "http://" + ip + "/dashboard/php/connect.php";
         String info_path = infoFilePath;
 
@@ -304,9 +315,34 @@ public class MainActivity extends AppCompatActivity
 
         if (requestCode == Constants.REQ_CHOOSE_VIDEO && resultCode == RESULT_OK && data != null && data.getData() != null) {
             mFilePath = data.getData();
-            infoFilePath = createVideoInfoFile("video_info.txt", "test");
+            infoFilePath = createVideoInfoFile("video_info.txt", getPositionRGB());
             getFrame();
         }
+    }
+
+    private int getEdgeInPx(int p1, int p2) {
+        return Math.abs(p2 - p1);
+    }
+
+    private String getPositionRGB() { // Return X, Y, W, H
+        // Here left, top, right, bottom already in pixels.
+        String result =
+                  Constants.getPosition(mContext, "R").left() + ","
+                + Constants.getPosition(mContext, "R").top() + ","
+                + getEdgeInPx(Constants.getPosition(mContext, "R").right(), Constants.getPosition(mContext, "R").left()) + ","
+                + getEdgeInPx(Constants.getPosition(mContext, "R").top(), Constants.getPosition(mContext, "R").bottom()) + "\n"
+
+                + Constants.getPosition(mContext, "G").left() + ","
+                + Constants.getPosition(mContext, "G").top() + ","
+                + getEdgeInPx(Constants.getPosition(mContext, "G").right(), Constants.getPosition(mContext, "G").left()) + ","
+                + getEdgeInPx(Constants.getPosition(mContext, "G").top(), Constants.getPosition(mContext, "G").bottom()) + "\n"
+
+                + Constants.getPosition(mContext, "B").left() + ","
+                + Constants.getPosition(mContext, "B").top() + ","
+                + getEdgeInPx(Constants.getPosition(mContext, "B").right(), Constants.getPosition(mContext, "B").left()) + ","
+                + getEdgeInPx(Constants.getPosition(mContext, "B").top(), Constants.getPosition(mContext, "B").bottom()) + "\n";
+        Log.d(TAG, "getPositionRGB: \n" + result);
+        return result;
     }
 
     private void requestStoragePermission() {
@@ -347,15 +383,28 @@ public class MainActivity extends AppCompatActivity
             i++;
         }
 
+        // ex. 960*540 video
+        Log.i(TAG, "Frame image height: " + detected_frame.imageHeight + ", width: " + detected_frame.imageWidth);
+
         Bitmap originalBitmap = mAndroidConverter.convert(detected_frame);
-        drawView.setImageDrawable(new BitmapDrawable(getResources(), originalBitmap));
+        mDrawImg.setImageDrawable(new BitmapDrawable(getResources(), originalBitmap));
+
+        ViewGroup.LayoutParams drawViewParams=mDrawImg.getLayoutParams();
+        drawViewParams.width = (int)(detected_frame.imageWidth);
+        drawViewParams.height = (int)(detected_frame.imageHeight);
+        mDragRectView.setLayoutParams(drawViewParams);
+
+        ViewGroup.LayoutParams drawAreaParams=mDragRectView.getLayoutParams();
+        drawAreaParams.width = (int)(detected_frame.imageWidth);
+        drawAreaParams.height = (int)(detected_frame.imageHeight);
+        mDragRectView.setLayoutParams(drawAreaParams);
         fGrabber.stop();
     }
 
     private void getFrame() {
         try {
-            Constants.resetAllPotition(getApplicationContext());
-            Constants.setBoolSharedPref(Constants.RGB_SET_ALL, false, getApplicationContext());
+            Constants.resetAllPotition(mContext);
+            Constants.setBoolSharedPref(Constants.RGB_SET_ALL, false, mContext);
             String path = trimStart(mFilePath.getPath(), "/file");
             Log.i(TAG ,"filePath: " + mFilePath);
             fetchFrame(path);

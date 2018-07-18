@@ -31,24 +31,22 @@
                 android:text="@string/upload" />
         </LinearLayout>
         <RelativeLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/drawTopView"
             android:layout_height="@dimen/drawView_height"
             android:layout_width="@dimen/drawView_width"
-            android:id="@+id/root"
             android:background="@android:color/background_dark">
-
             <ImageView
-                android:id="@+id/drawView"
+                android:id="@+id/drawImg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/nav_header_desc"
-                android:background="@color/black"/>
-
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
             <com.ranita.babyhelper.DragRectView
+                android:id="@+id/dragRect"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/dragRect" />
-
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
         </RelativeLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
