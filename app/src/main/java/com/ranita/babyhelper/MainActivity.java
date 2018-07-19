@@ -33,8 +33,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
+import net.gotev.uploadservice.ServerResponse;
+import net.gotev.uploadservice.UploadInfo;
 import net.gotev.uploadservice.UploadNotificationConfig;
 import net.gotev.uploadservice.UploadService;
+import net.gotev.uploadservice.UploadServiceSingleBroadcastReceiver;
+import net.gotev.uploadservice.UploadStatusDelegate;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -47,7 +51,7 @@ import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.OpenCVFrameConverter;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, UploadStatusDelegate {
     private static final String TAG = MainActivity.class.getName();
     public static String UPLOAD_URL;
     private Context mContext;
@@ -63,9 +67,9 @@ public class MainActivity extends AppCompatActivity
 
     private Uri mFilePath;
     private String infoFilePath;
-    private UploadFileReceiver mUploadReceiver = null;
     private static OpenCVFrameConverter.ToIplImage mConverter = new OpenCVFrameConverter.ToIplImage();
     AndroidFrameConverter mAndroidConverter = new AndroidFrameConverter();
+    private UploadServiceSingleBroadcastReceiver mUploadReceiver;
 
     // Actual img size
     private static int mScreenActualImgHeight = 0;
@@ -82,13 +86,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         mContext = getApplicationContext();
 
-        mUploadReceiver = new UploadFileReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Constants.UPLOAD_FILE_RECEIVER_NAME);
-        this.registerReceiver(mUploadReceiver, filter);
-
         requestStoragePermission();
         UploadService.NAMESPACE = BuildConfig.APPLICATION_ID; // must set namespace before using UploadService
+        mUploadReceiver = new UploadServiceSingleBroadcastReceiver(this);
 
         btnChoose = (Button) findViewById(R.id.btnChoose);
         btnUpload = (Button) findViewById(R.id.btnUpload);
@@ -156,6 +156,25 @@ public class MainActivity extends AppCompatActivity
         // Example of a call to a native method
         // TextView tv = (TextView) findViewById(R.id.sample_text);
         // tv.setText(stringFromJNI());
+    }
+
+    @Override
+    public void onProgress(Context context, UploadInfo uploadInfo) {
+    }
+
+    @Override
+    public void onError(Context context, UploadInfo uploadInfo, ServerResponse serverResponse, Exception exception) {
+        Log.d(TAG, "UploadStatusDelegate onError, uploadInfo: " + uploadInfo.getUploadId() + ", server resp: " + serverResponse + ", except: " + exception.toString());
+    }
+
+    @Override
+    public void onCompleted(Context context, UploadInfo uploadInfo, ServerResponse serverResponse) {
+        Log.d(TAG, "UploadStatusDelegate onCompleted, uploadInfo: " + uploadInfo.getUploadId() + ", server resp: " + serverResponse);
+    }
+
+    @Override
+    public void onCancelled(Context context, UploadInfo uploadInfo) {
+        Log.d(TAG, "UploadStatusDelegate onCancelled");
     }
 
     // Nav
@@ -268,6 +287,7 @@ public class MainActivity extends AppCompatActivity
 
         try {
             String uploadId = UUID.randomUUID().toString();
+            mUploadReceiver.setUploadID(uploadId);
             Log.i(TAG ,uploadId + uploadId);
             //Creating a multi part request
             new MultipartUploadRequest(this, uploadId, UPLOAD_URL)
@@ -409,9 +429,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mUploadReceiver.register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mUploadReceiver.unregister(this);
+    }
+
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
-        this.unregisterReceiver(mUploadReceiver);
     }
 
     /**
