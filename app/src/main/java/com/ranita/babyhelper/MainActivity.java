@@ -4,11 +4,11 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -17,13 +17,16 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -53,7 +56,7 @@ import org.bytedeco.javacv.OpenCVFrameConverter;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, UploadStatusDelegate {
     private static final String TAG = MainActivity.class.getName();
-    public static String UPLOAD_URL;
+    private static String UPLOAD_URL;
     private Context mContext;
 
     private Button btnChoose;
@@ -64,16 +67,19 @@ public class MainActivity extends AppCompatActivity
     private ImageView mDrawImg;
     private DrawerLayout mDrawerLayout;
     private DragRectView mDragRectView;
+    private RelativeLayout mDrawAreaLayout;
 
     private Uri mFilePath;
-    private String infoFilePath;
     private static OpenCVFrameConverter.ToIplImage mConverter = new OpenCVFrameConverter.ToIplImage();
     AndroidFrameConverter mAndroidConverter = new AndroidFrameConverter();
-    private UploadServiceSingleBroadcastReceiver mUploadReceiver;
-
-    // Actual img size
-    private static int mScreenActualImgHeight = 0;
-    private static int mScreenActualImgWidth = 0;
+    private final SingleUploadBroadcastReceiver mUploadReceiver =
+            new SingleUploadBroadcastReceiver();
+    private double mW_RealRatio = 0;
+    private double mH_RealRatio = 0;
+    private double mImgViewWidth = 0;
+    private double mImgViewHeight = 0;
+    private int mVideoWidth = 0;
+    private int mVideoHeight = 0;
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -85,10 +91,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext = getApplicationContext();
-
         requestStoragePermission();
         UploadService.NAMESPACE = BuildConfig.APPLICATION_ID; // must set namespace before using UploadService
-        mUploadReceiver = new UploadServiceSingleBroadcastReceiver(this);
 
         btnChoose = (Button) findViewById(R.id.btnChoose);
         btnUpload = (Button) findViewById(R.id.btnUpload);
@@ -100,6 +104,7 @@ public class MainActivity extends AppCompatActivity
         nvView.setItemIconTintList(null);
 
         mDrawImg = (ImageView) findViewById(R.id.drawImg);
+        mDrawAreaLayout = (RelativeLayout) findViewById(R.id.drawTopView);
 
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -250,7 +255,7 @@ public class MainActivity extends AppCompatActivity
         String name = Constants.getSharedPref(Constants.INPUT_USER, mContext).trim();
         String ip = Constants.getSharedPref(Constants.INPUT_IP, mContext).trim();
         UPLOAD_URL = "http://" + ip + "/dashboard/php/connect.php";
-        String info_path = infoFilePath;
+        String info_path = createVideoInfoFile("video_info.txt", getRealPositionRGB());
 
         if (mFilePath == null) {
             Toast.makeText(this, R.string.video_file_not_found, Toast.LENGTH_LONG).show();
@@ -287,6 +292,7 @@ public class MainActivity extends AppCompatActivity
 
         try {
             String uploadId = UUID.randomUUID().toString();
+            mUploadReceiver.setDelegate(this);
             mUploadReceiver.setUploadID(uploadId);
             Log.i(TAG ,uploadId + uploadId);
             //Creating a multi part request
@@ -295,7 +301,7 @@ public class MainActivity extends AppCompatActivity
                     .addFileToUpload(info_path, "txt") //Adding txt file
                     .addParameter("upload_user_name", name) //Adding text
                     .setNotificationConfig(new UploadNotificationConfig())
-                    .setMaxRetries(2)
+                    .setMaxRetries(0)
                     .startUpload();
         } catch (Exception ex) {
             Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT).show();
@@ -330,7 +336,6 @@ public class MainActivity extends AppCompatActivity
 
         if (requestCode == Constants.REQ_CHOOSE_VIDEO && resultCode == RESULT_OK && data != null && data.getData() != null) {
             mFilePath = data.getData();
-            infoFilePath = createVideoInfoFile("video_info.txt", getPositionRGB());
             getFrame();
         }
     }
@@ -339,24 +344,31 @@ public class MainActivity extends AppCompatActivity
         return Math.abs(p2 - p1);
     }
 
-    private String getPositionRGB() { // Return X, Y, W, H
+    private int toRealWScale(int w_val) {
+        Log.d(TAG, "Img Width:" + mImgViewWidth + "w_val: " + w_val + ", mW_RealRatio: " + mW_RealRatio + "\n");
+        return (int) (w_val * mW_RealRatio);
+    }
+
+    private int toRealHScale(int h_val) {
+        Log.d(TAG, "Img height:" + mImgViewHeight + "h_val: " + h_val + ", mH_RealRatio: " + mH_RealRatio + "\n");
+        return (int) (h_val * mH_RealRatio);
+    }
+
+    private String getColorPositionStr(String color) {
+        String result =
+            toRealWScale(Constants.getPosition(mContext, color).left()) + ","
+            + toRealHScale(Constants.getPosition(mContext, color).top()) + ","
+            + toRealWScale(getEdgeInPx(Constants.getPosition(mContext, color).right(), Constants.getPosition(mContext, color).left())) + ","
+            + toRealHScale(getEdgeInPx(Constants.getPosition(mContext, color).top(), Constants.getPosition(mContext, color).bottom())) + "\n";
+        return result;
+    }
+
+
+    private String getRealPositionRGB() { // Return X, Y, W, H
         // Here left, top, right, bottom already in pixels.
         String result =
-                  Constants.getPosition(mContext, "R").left() + ","
-                + Constants.getPosition(mContext, "R").top() + ","
-                + getEdgeInPx(Constants.getPosition(mContext, "R").right(), Constants.getPosition(mContext, "R").left()) + ","
-                + getEdgeInPx(Constants.getPosition(mContext, "R").top(), Constants.getPosition(mContext, "R").bottom()) + "\n"
-
-                + Constants.getPosition(mContext, "G").left() + ","
-                + Constants.getPosition(mContext, "G").top() + ","
-                + getEdgeInPx(Constants.getPosition(mContext, "G").right(), Constants.getPosition(mContext, "G").left()) + ","
-                + getEdgeInPx(Constants.getPosition(mContext, "G").top(), Constants.getPosition(mContext, "G").bottom()) + "\n"
-
-                + Constants.getPosition(mContext, "B").left() + ","
-                + Constants.getPosition(mContext, "B").top() + ","
-                + getEdgeInPx(Constants.getPosition(mContext, "B").right(), Constants.getPosition(mContext, "B").left()) + ","
-                + getEdgeInPx(Constants.getPosition(mContext, "B").top(), Constants.getPosition(mContext, "B").bottom()) + "\n";
-        Log.d(TAG, "getPositionRGB: \n" + result);
+                getColorPositionStr("G") + getColorPositionStr("R") + getColorPositionStr("B");
+        Log.d(TAG, "getRealPositionRGB: \n" + result);
         return result;
     }
 
@@ -381,39 +393,62 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void fetchFrame(String videofile) throws Exception {
-        long start = System.currentTimeMillis();
-        // File targetFile = new File(framefile);
+        // long startTime = System.currentTimeMillis();
         FFmpegFrameGrabber fGrabber = new FFmpegFrameGrabber(videofile);
         fGrabber.start();
         int length = fGrabber.getLengthInFrames();
+        Log.i(TAG, "frame length: " + length);
         int i = 0;
         int remove_frame_count = 30;
         Frame detected_frame = null;
         while (i < length) {
             detected_frame = fGrabber.grabFrame();
+            // long currentTime = System.currentTimeMillis();
 
             if ((i > remove_frame_count) && (detected_frame.image != null)) {
+            // Log.i(TAG, "startTime: " + startTime + ", currentTime: " + currentTime);
+            // if ((currentTime - startTime) > remove_frame_count) {
                 break;
             }
-            i++;
+
+            if (detected_frame.image != null) {
+                i++;
+                Log.i(TAG, "frame i: " + i);
+            }
         }
 
         // ex. 960*540 video
         Log.i(TAG, "Frame image height: " + detected_frame.imageHeight + ", width: " + detected_frame.imageWidth);
-
+        mVideoWidth = detected_frame.imageWidth;
+        mVideoHeight = detected_frame.imageHeight;
         Bitmap originalBitmap = mAndroidConverter.convert(detected_frame);
+        originalBitmap.setWidth(mVideoWidth);
+        originalBitmap.setHeight(mVideoHeight);
         mDrawImg.setImageDrawable(new BitmapDrawable(getResources(), originalBitmap));
 
-        ViewGroup.LayoutParams drawViewParams=mDrawImg.getLayoutParams();
-        drawViewParams.width = (int)(detected_frame.imageWidth);
-        drawViewParams.height = (int)(detected_frame.imageHeight);
-        mDragRectView.setLayoutParams(drawViewParams);
+        ViewGroup.LayoutParams drawViewParams=mDrawAreaLayout.getLayoutParams();
+        drawViewParams.width = mVideoWidth;
+        drawViewParams.height = mVideoHeight;
+        mDrawAreaLayout.setLayoutParams(drawViewParams);
 
         ViewGroup.LayoutParams drawAreaParams=mDragRectView.getLayoutParams();
-        drawAreaParams.width = (int)(detected_frame.imageWidth);
-        drawAreaParams.height = (int)(detected_frame.imageHeight);
+        drawAreaParams.width = mVideoWidth;
+        drawAreaParams.height = mVideoHeight;
         mDragRectView.setLayoutParams(drawAreaParams);
         fGrabber.stop();
+
+        ViewTreeObserver vto = mDrawImg.getViewTreeObserver();
+        vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            public boolean onPreDraw() {
+                mDrawImg.getViewTreeObserver().removeOnPreDrawListener(this);
+                mImgViewWidth = mDrawImg.getMeasuredWidth();
+                mImgViewHeight = mDrawImg.getMeasuredHeight();
+                Log.i(TAG, "Height: " + mImgViewHeight + " Width: " + mImgViewWidth);
+                mW_RealRatio = mVideoWidth / mImgViewWidth;
+                mH_RealRatio = mVideoHeight / mImgViewHeight;
+                return true;
+            }
+        });
     }
 
     private void getFrame() {
