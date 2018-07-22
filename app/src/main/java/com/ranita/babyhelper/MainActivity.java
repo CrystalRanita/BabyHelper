@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -17,7 +16,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +38,6 @@ import net.gotev.uploadservice.ServerResponse;
 import net.gotev.uploadservice.UploadInfo;
 import net.gotev.uploadservice.UploadNotificationConfig;
 import net.gotev.uploadservice.UploadService;
-import net.gotev.uploadservice.UploadServiceSingleBroadcastReceiver;
 import net.gotev.uploadservice.UploadStatusDelegate;
 
 import java.io.File;
@@ -51,7 +48,6 @@ import java.util.UUID;
 import org.bytedeco.javacv.AndroidFrameConverter;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.Frame;
-import org.bytedeco.javacv.OpenCVFrameConverter;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, UploadStatusDelegate {
@@ -70,7 +66,6 @@ public class MainActivity extends AppCompatActivity
     private RelativeLayout mDrawAreaLayout;
 
     private Uri mFilePath;
-    private static OpenCVFrameConverter.ToIplImage mConverter = new OpenCVFrameConverter.ToIplImage();
     AndroidFrameConverter mAndroidConverter = new AndroidFrameConverter();
     private final SingleUploadBroadcastReceiver mUploadReceiver =
             new SingleUploadBroadcastReceiver();
@@ -165,16 +160,31 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onProgress(Context context, UploadInfo uploadInfo) {
+        Log.d(TAG, "UploadStatusDelegate onProgress, uploadInfo: " + uploadInfo.getUploadId() + ", progress: " + uploadInfo.getProgressPercent() + ", UploadRate:" + uploadInfo.getUploadRate() );
     }
 
     @Override
     public void onError(Context context, UploadInfo uploadInfo, ServerResponse serverResponse, Exception exception) {
-        Log.d(TAG, "UploadStatusDelegate onError, uploadInfo: " + uploadInfo.getUploadId() + ", server resp: " + serverResponse + ", except: " + exception.toString());
+        Log.d(TAG, "UploadStatusDelegate onError, uploadInfo: " + uploadInfo.getUploadId() + ", server resp: " + serverResponse + ", except: " + exception);
+        if (serverResponse != null) {
+            Log.d(TAG, "UploadStatusDelegate onError, getBodyAsString: " + serverResponse.getBodyAsString());
+            Log.d(TAG, "UploadStatusDelegate onError, getBody: " + serverResponse.getBody());
+            Log.d(TAG, "UploadStatusDelegate onError, getHeaders: " + serverResponse.getHeaders());
+            Log.d(TAG, "UploadStatusDelegate onError, getHttpCode: " + serverResponse.getHttpCode());
+            Log.d(TAG, "UploadStatusDelegate onError, describeContents: " + serverResponse.describeContents());
+        }
     }
 
     @Override
     public void onCompleted(Context context, UploadInfo uploadInfo, ServerResponse serverResponse) {
-        Log.d(TAG, "UploadStatusDelegate onCompleted, uploadInfo: " + uploadInfo.getUploadId() + ", server resp: " + serverResponse);
+        Log.d(TAG, "UploadStatusDelegate onCompleted, uploadInfo: " + uploadInfo.getUploadId() + ", server resp: " +  serverResponse.toString() );
+        if (serverResponse != null) {
+            Log.d(TAG, "UploadStatusDelegate onCompleted, getBodyAsString: " + serverResponse.getBodyAsString());
+            Log.d(TAG, "UploadStatusDelegate onCompleted, getBody: " + serverResponse.getBody());
+            Log.d(TAG, "UploadStatusDelegate onCompleted, getHeaders: " + serverResponse.getHeaders());
+            Log.d(TAG, "UploadStatusDelegate onCompleted, getHttpCode: " + serverResponse.getHttpCode());
+            Log.d(TAG, "UploadStatusDelegate onCompleted, describeContents: " + serverResponse.describeContents());
+        }
     }
 
     @Override
@@ -301,6 +311,7 @@ public class MainActivity extends AppCompatActivity
                     .addFileToUpload(info_path, "txt") //Adding txt file
                     .addParameter("upload_user_name", name) //Adding text
                     .setNotificationConfig(new UploadNotificationConfig())
+                    .setUtf8Charset()
                     .setMaxRetries(0)
                     .startUpload();
         } catch (Exception ex) {
