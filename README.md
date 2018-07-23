@@ -8,6 +8,9 @@
   https://github.com/gotev/android-upload-service
 
 # Reference
+  Use OkHttp3 to set response timeout for run php exec neew to wait for a long period.
+  https://github.com/henrymorgen/android-okhttp3
+
   Android Upload Image using Android Upload Service, author: Belal Khan.
   https://www.simplifiedcoding.net/android-upload-image-to-server/
   This is perfect material to learn how to upload file.

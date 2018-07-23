@@ -33,24 +33,36 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import net.gotev.uploadservice.MultipartUploadRequest;
-import net.gotev.uploadservice.ServerResponse;
-import net.gotev.uploadservice.UploadInfo;
-import net.gotev.uploadservice.UploadNotificationConfig;
-import net.gotev.uploadservice.UploadService;
-import net.gotev.uploadservice.UploadStatusDelegate;
+//import net.gotev.uploadservice.MultipartUploadRequest;
+//import net.gotev.uploadservice.ServerResponse;
+//import net.gotev.uploadservice.UploadInfo;
+//import net.gotev.uploadservice.UploadNotificationConfig;
+//import net.gotev.uploadservice.UploadService;
+//import net.gotev.uploadservice.UploadStatusDelegate;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import org.bytedeco.javacv.AndroidFrameConverter;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.Frame;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+//public class MainActivity extends AppCompatActivity
+//        implements NavigationView.OnNavigationItemSelectedListener, UploadStatusDelegate {
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, UploadStatusDelegate {
+        implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = MainActivity.class.getName();
     private static String UPLOAD_URL;
     private Context mContext;
@@ -76,6 +88,11 @@ public class MainActivity extends AppCompatActivity
     private int mVideoWidth = 0;
     private int mVideoHeight = 0;
 
+    private static final MediaType MEDIA_TYPE_MP4 = MediaType.parse("application/octet-stream");
+    public static final MediaType MEDIA_TYPE_TXT
+            = MediaType.parse("text/x-markdown; charset=utf-8");
+    private OkHttpClient mOkHttpClient;
+
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
@@ -87,7 +104,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         mContext = getApplicationContext();
         requestStoragePermission();
-        UploadService.NAMESPACE = BuildConfig.APPLICATION_ID; // must set namespace before using UploadService
+        initOkHttpClient();
+//        UploadService.NAMESPACE = BuildConfig.APPLICATION_ID; // must set namespace before using UploadService
 
         btnChoose = (Button) findViewById(R.id.btnChoose);
         btnUpload = (Button) findViewById(R.id.btnUpload);
@@ -158,39 +176,47 @@ public class MainActivity extends AppCompatActivity
         // tv.setText(stringFromJNI());
     }
 
-    @Override
-    public void onProgress(Context context, UploadInfo uploadInfo) {
-        Log.d(TAG, "UploadStatusDelegate onProgress, uploadInfo: " + uploadInfo.getUploadId() + ", progress: " + uploadInfo.getProgressPercent() + ", UploadRate:" + uploadInfo.getUploadRate() );
+    private void initOkHttpClient() {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .writeTimeout(120, TimeUnit.SECONDS)
+                .readTimeout(120, TimeUnit.SECONDS);
+        mOkHttpClient = builder.build();
     }
 
-    @Override
-    public void onError(Context context, UploadInfo uploadInfo, ServerResponse serverResponse, Exception exception) {
-        Log.d(TAG, "UploadStatusDelegate onError, uploadInfo: " + uploadInfo.getUploadId() + ", server resp: " + serverResponse + ", except: " + exception);
-        if (serverResponse != null) {
-            Log.d(TAG, "UploadStatusDelegate onError, getBodyAsString: " + serverResponse.getBodyAsString());
-            Log.d(TAG, "UploadStatusDelegate onError, getBody: " + serverResponse.getBody());
-            Log.d(TAG, "UploadStatusDelegate onError, getHeaders: " + serverResponse.getHeaders());
-            Log.d(TAG, "UploadStatusDelegate onError, getHttpCode: " + serverResponse.getHttpCode());
-            Log.d(TAG, "UploadStatusDelegate onError, describeContents: " + serverResponse.describeContents());
-        }
-    }
-
-    @Override
-    public void onCompleted(Context context, UploadInfo uploadInfo, ServerResponse serverResponse) {
-        Log.d(TAG, "UploadStatusDelegate onCompleted, uploadInfo: " + uploadInfo.getUploadId() + ", server resp: " +  serverResponse.toString() );
-        if (serverResponse != null) {
-            Log.d(TAG, "UploadStatusDelegate onCompleted, getBodyAsString: " + serverResponse.getBodyAsString());
-            Log.d(TAG, "UploadStatusDelegate onCompleted, getBody: " + serverResponse.getBody());
-            Log.d(TAG, "UploadStatusDelegate onCompleted, getHeaders: " + serverResponse.getHeaders());
-            Log.d(TAG, "UploadStatusDelegate onCompleted, getHttpCode: " + serverResponse.getHttpCode());
-            Log.d(TAG, "UploadStatusDelegate onCompleted, describeContents: " + serverResponse.describeContents());
-        }
-    }
-
-    @Override
-    public void onCancelled(Context context, UploadInfo uploadInfo) {
-        Log.d(TAG, "UploadStatusDelegate onCancelled");
-    }
+//    @Override
+//    public void onProgress(Context context, UploadInfo uploadInfo) {
+//        Log.d(TAG, "UploadStatusDelegate onProgress, uploadInfo: " + uploadInfo.getUploadId() + ", progress: " + uploadInfo.getProgressPercent() + ", UploadRate:" + uploadInfo.getUploadRate() );
+//    }
+//
+//    @Override
+//    public void onError(Context context, UploadInfo uploadInfo, ServerResponse serverResponse, Exception exception) {
+//        Log.d(TAG, "UploadStatusDelegate onError, uploadInfo: " + uploadInfo.getUploadId() + ", server resp: " + serverResponse + ", except: " + exception);
+//        if (serverResponse != null) {
+//            Log.d(TAG, "UploadStatusDelegate onError, getBodyAsString: " + serverResponse.getBodyAsString());
+//            Log.d(TAG, "UploadStatusDelegate onError, getBody: " + serverResponse.getBody());
+//            Log.d(TAG, "UploadStatusDelegate onError, getHeaders: " + serverResponse.getHeaders());
+//            Log.d(TAG, "UploadStatusDelegate onError, getHttpCode: " + serverResponse.getHttpCode());
+//            Log.d(TAG, "UploadStatusDelegate onError, describeContents: " + serverResponse.describeContents());
+//        }
+//    }
+//
+//    @Override
+//    public void onCompleted(Context context, UploadInfo uploadInfo, ServerResponse serverResponse) {
+//        Log.d(TAG, "UploadStatusDelegate onCompleted, uploadInfo: " + uploadInfo.getUploadId() + ", server resp: " +  serverResponse.toString() );
+//        if (serverResponse != null) {
+//            Log.d(TAG, "UploadStatusDelegate onCompleted, getBodyAsString: " + serverResponse.getBodyAsString());
+//            Log.d(TAG, "UploadStatusDelegate onCompleted, getBody: " + serverResponse.getBody());
+//            Log.d(TAG, "UploadStatusDelegate onCompleted, getHeaders: " + serverResponse.getHeaders());
+//            Log.d(TAG, "UploadStatusDelegate onCompleted, getHttpCode: " + serverResponse.getHttpCode());
+//            Log.d(TAG, "UploadStatusDelegate onCompleted, describeContents: " + serverResponse.describeContents());
+//        }
+//    }
+//
+//    @Override
+//    public void onCancelled(Context context, UploadInfo uploadInfo) {
+//        Log.d(TAG, "UploadStatusDelegate onCancelled");
+//    }
 
     // Nav
     @Override
@@ -302,24 +328,51 @@ public class MainActivity extends AppCompatActivity
 
         try {
             String uploadId = UUID.randomUUID().toString();
-            mUploadReceiver.setDelegate(this);
-            mUploadReceiver.setUploadID(uploadId);
-            Log.i(TAG ,uploadId + uploadId);
-            //Creating a multi part request
-            new MultipartUploadRequest(this, uploadId, UPLOAD_URL)
-                    .addFileToUpload(path, "video") //Adding video file
-                    .addFileToUpload(info_path, "txt") //Adding txt file
-                    .addParameter("upload_user_name", name) //Adding text
-                    .setNotificationConfig(new UploadNotificationConfig())
-                    .setUtf8Charset()
-                    .setMaxRetries(0)
-                    .startUpload();
+//            mUploadReceiver.setDelegate(this);
+//            mUploadReceiver.setUploadID(uploadId);
+//            Log.i(TAG ,uploadId + uploadId);
+//            //Creating a multi part request
+//            new MultipartUploadRequest(this, uploadId, UPLOAD_URL)
+//                    .addFileToUpload(path, "video") //Adding video file
+//                    .addFileToUpload(info_path, "txt") //Adding txt file
+//                    .addParameter("upload_user_name", name) //Adding text
+//                    .setNotificationConfig(new UploadNotificationConfig())
+//                    .setUtf8Charset()
+//                    .setMaxRetries(0)
+//                    .startUpload();
+
+            RequestBody requestBody = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("video", path,
+                            RequestBody.create(MEDIA_TYPE_MP4, new File(path)))
+                    .addFormDataPart("txt", info_path,
+                            RequestBody.create(MEDIA_TYPE_TXT, new File(info_path)))
+                    .addFormDataPart("upload_user_name", name)
+                    .build();
+
+            Request request = new Request.Builder()
+                    .header("Authorization", "Client-ID " + uploadId)
+                    .url(UPLOAD_URL)
+                    .post(requestBody)
+                    .build();
+
+            mOkHttpClient.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Log.i(TAG, "sendVideo onFailure: " +e.toString());
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    Log.i(TAG, "sendVideo: " + response.body().string());
+                }
+            });
         } catch (Exception ex) {
             Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    public String createVideoInfoFile(String filename, String content) {
+    private String createVideoInfoFile(String filename, String content) {
         try {
             File storedDir = new File(Environment.getExternalStorageDirectory(), "BabyHelperTxt");
             if (!storedDir.exists()) {
@@ -477,13 +530,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        mUploadReceiver.register(this);
+        // mUploadReceiver.register(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mUploadReceiver.unregister(this);
+        // mUploadReceiver.unregister(this);
     }
 
 
