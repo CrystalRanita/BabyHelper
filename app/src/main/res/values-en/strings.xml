@@ -20,4 +20,9 @@
     <string name="cancel">Cancel</string>
     <string name="upload">Upload</string>
     <string name="choose_video">Select Video</string>
+    <string name="uploading">Video uploading.</string>
+    <string name="upload_finished">Upload finished.</string>
+    <string name="analyse">Video Analysing</string>
+    <string name="analysing">Analysing...</string>
+    <string name="analysing_result">Analysing Result:</string>
 </resources>

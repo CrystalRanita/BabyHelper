@@ -9,4 +9,5 @@
     <color name="lightgray">#DDDDDD</color>
     <color name="darkgray">#A9A9A9</color>
     <color name="lightBlue">#4da6ff</color>
+    <color name="progress_color">#66b3ff</color>
 </resources>

@@ -6,8 +6,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.ranita.babyhelper.Position;
-
 public class Constants {
     public static final String UPLOAD_FILE_RECEIVER_NAME = "com.ranita.babyhelper.uploadservice.broadcast.status";
 

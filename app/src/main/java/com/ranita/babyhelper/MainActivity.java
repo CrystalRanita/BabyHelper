@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
@@ -24,7 +25,9 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -32,13 +35,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-
-//import net.gotev.uploadservice.MultipartUploadRequest;
-//import net.gotev.uploadservice.ServerResponse;
-//import net.gotev.uploadservice.UploadInfo;
-//import net.gotev.uploadservice.UploadNotificationConfig;
-//import net.gotev.uploadservice.UploadService;
-//import net.gotev.uploadservice.UploadStatusDelegate;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -50,6 +46,9 @@ import org.bytedeco.javacv.AndroidFrameConverter;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.Frame;
 
+import io.github.lizhangqu.coreprogress.ProgressHelper;
+import io.github.lizhangqu.coreprogress.ProgressUIListener;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -59,8 +58,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-//public class MainActivity extends AppCompatActivity
-//        implements NavigationView.OnNavigationItemSelectedListener, UploadStatusDelegate {
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = MainActivity.class.getName();
@@ -76,11 +73,12 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout mDrawerLayout;
     private DragRectView mDragRectView;
     private RelativeLayout mDrawAreaLayout;
+    private ProgressBar mUploadProgressBar;
+    private TextView mUpload_info;
 
     private Uri mFilePath;
     AndroidFrameConverter mAndroidConverter = new AndroidFrameConverter();
-    private final SingleUploadBroadcastReceiver mUploadReceiver =
-            new SingleUploadBroadcastReceiver();
+
     private double mW_RealRatio = 0;
     private double mH_RealRatio = 0;
     private double mImgViewWidth = 0;
@@ -105,7 +103,6 @@ public class MainActivity extends AppCompatActivity
         mContext = getApplicationContext();
         requestStoragePermission();
         initOkHttpClient();
-//        UploadService.NAMESPACE = BuildConfig.APPLICATION_ID; // must set namespace before using UploadService
 
         btnChoose = (Button) findViewById(R.id.btnChoose);
         btnUpload = (Button) findViewById(R.id.btnUpload);
@@ -118,6 +115,10 @@ public class MainActivity extends AppCompatActivity
 
         mDrawImg = (ImageView) findViewById(R.id.drawImg);
         mDrawAreaLayout = (RelativeLayout) findViewById(R.id.drawTopView);
+
+        mUploadProgressBar = (ProgressBar) findViewById(R.id.upload_progress);
+        mUploadProgressBar.setProgressTintList(ColorStateList.valueOf(getResources().getColor(R.color.progress_color)));
+        mUpload_info = (TextView) findViewById(R.id.upload_info);
 
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,40 +185,6 @@ public class MainActivity extends AppCompatActivity
         mOkHttpClient = builder.build();
     }
 
-//    @Override
-//    public void onProgress(Context context, UploadInfo uploadInfo) {
-//        Log.d(TAG, "UploadStatusDelegate onProgress, uploadInfo: " + uploadInfo.getUploadId() + ", progress: " + uploadInfo.getProgressPercent() + ", UploadRate:" + uploadInfo.getUploadRate() );
-//    }
-//
-//    @Override
-//    public void onError(Context context, UploadInfo uploadInfo, ServerResponse serverResponse, Exception exception) {
-//        Log.d(TAG, "UploadStatusDelegate onError, uploadInfo: " + uploadInfo.getUploadId() + ", server resp: " + serverResponse + ", except: " + exception);
-//        if (serverResponse != null) {
-//            Log.d(TAG, "UploadStatusDelegate onError, getBodyAsString: " + serverResponse.getBodyAsString());
-//            Log.d(TAG, "UploadStatusDelegate onError, getBody: " + serverResponse.getBody());
-//            Log.d(TAG, "UploadStatusDelegate onError, getHeaders: " + serverResponse.getHeaders());
-//            Log.d(TAG, "UploadStatusDelegate onError, getHttpCode: " + serverResponse.getHttpCode());
-//            Log.d(TAG, "UploadStatusDelegate onError, describeContents: " + serverResponse.describeContents());
-//        }
-//    }
-//
-//    @Override
-//    public void onCompleted(Context context, UploadInfo uploadInfo, ServerResponse serverResponse) {
-//        Log.d(TAG, "UploadStatusDelegate onCompleted, uploadInfo: " + uploadInfo.getUploadId() + ", server resp: " +  serverResponse.toString() );
-//        if (serverResponse != null) {
-//            Log.d(TAG, "UploadStatusDelegate onCompleted, getBodyAsString: " + serverResponse.getBodyAsString());
-//            Log.d(TAG, "UploadStatusDelegate onCompleted, getBody: " + serverResponse.getBody());
-//            Log.d(TAG, "UploadStatusDelegate onCompleted, getHeaders: " + serverResponse.getHeaders());
-//            Log.d(TAG, "UploadStatusDelegate onCompleted, getHttpCode: " + serverResponse.getHttpCode());
-//            Log.d(TAG, "UploadStatusDelegate onCompleted, describeContents: " + serverResponse.describeContents());
-//        }
-//    }
-//
-//    @Override
-//    public void onCancelled(Context context, UploadInfo uploadInfo) {
-//        Log.d(TAG, "UploadStatusDelegate onCancelled");
-//    }
-
     // Nav
     @Override
     public void onBackPressed() {
@@ -252,7 +219,6 @@ public class MainActivity extends AppCompatActivity
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -328,35 +294,53 @@ public class MainActivity extends AppCompatActivity
 
         try {
             String uploadId = UUID.randomUUID().toString();
-//            mUploadReceiver.setDelegate(this);
-//            mUploadReceiver.setUploadID(uploadId);
-//            Log.i(TAG ,uploadId + uploadId);
-//            //Creating a multi part request
-//            new MultipartUploadRequest(this, uploadId, UPLOAD_URL)
-//                    .addFileToUpload(path, "video") //Adding video file
-//                    .addFileToUpload(info_path, "txt") //Adding txt file
-//                    .addParameter("upload_user_name", name) //Adding text
-//                    .setNotificationConfig(new UploadNotificationConfig())
-//                    .setUtf8Charset()
-//                    .setMaxRetries(0)
-//                    .startUpload();
+            Request.Builder request = new Request.Builder();
+            request.header("Authorization", "Client-ID " + uploadId);
+            request.url(UPLOAD_URL);
 
-            RequestBody requestBody = new MultipartBody.Builder()
-                    .setType(MultipartBody.FORM)
-                    .addFormDataPart("video", path,
-                            RequestBody.create(MEDIA_TYPE_MP4, new File(path)))
-                    .addFormDataPart("txt", info_path,
-                            RequestBody.create(MEDIA_TYPE_TXT, new File(info_path)))
-                    .addFormDataPart("upload_user_name", name)
-                    .build();
+            MultipartBody.Builder requestBodyBuilder = new MultipartBody.Builder();
+            requestBodyBuilder.setType(MultipartBody.FORM);
+            requestBodyBuilder.addFormDataPart("video", path,
+                            RequestBody.create(MEDIA_TYPE_MP4, new File(path)));
+            requestBodyBuilder.addFormDataPart("txt", info_path,
+                            RequestBody.create(MEDIA_TYPE_TXT, new File(info_path)));
+            requestBodyBuilder.addFormDataPart("upload_user_name", name);
+            MultipartBody build = requestBodyBuilder.build();
 
-            Request request = new Request.Builder()
-                    .header("Authorization", "Client-ID " + uploadId)
-                    .url(UPLOAD_URL)
-                    .post(requestBody)
-                    .build();
+            RequestBody requestBody = ProgressHelper.withProgress(build, new ProgressUIListener() {
 
-            mOkHttpClient.newCall(request).enqueue(new Callback() {
+                //if you don't need this method, don't override this methd. It isn't an abstract method, just an empty method.
+                @Override
+                public void onUIProgressStart(long totalBytes) {
+                    super.onUIProgressStart(totalBytes);
+                    Log.e("TAG", "onUIProgressStart:" + totalBytes);
+                    Toast.makeText(getApplicationContext(), "开始上传：" + totalBytes, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onUIProgressChanged(long numBytes, long totalBytes, float percent, float speed) {
+                    Log.e("TAG", "============= start ===============");
+                    Log.e("TAG", "numBytes: " + numBytes + " bytes");
+                    Log.e("TAG", "totalBytes: " + totalBytes + " bytes");
+                    Log.e("TAG", "percent: " + percent + " %");
+                    Log.e("TAG", "speed: " + speed * 1000 / 1024 / 1024 + "  MB/second");
+                    Log.e("TAG", "============= end ===============");
+                    mUploadProgressBar.setProgress((int) (100 * percent));
+                    mUpload_info.setText(percent * 100 + " %");
+                }
+
+                //if you don't need this method, don't override this methd. It isn't an abstract method, just an empty method.
+                @Override
+                public void onUIProgressFinish() {
+                    super.onUIProgressFinish();
+                    Log.e("TAG", "onUIProgressFinish:");
+                    Toast.makeText(getApplicationContext(), "结束上传", Toast.LENGTH_SHORT).show();
+                }
+            });
+            request.post(requestBody);
+            Call call = mOkHttpClient.newCall(request.build());
+
+            call.enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     Log.i(TAG, "sendVideo onFailure: " +e.toString());
@@ -530,13 +514,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        // mUploadReceiver.register(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        // mUploadReceiver.unregister(this);
     }
 
 

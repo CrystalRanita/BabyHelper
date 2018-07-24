@@ -14,21 +14,17 @@
         android:orientation="vertical">
         <LinearLayout
             android:gravity="center_horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnChoose"
-                android:layout_width="wrap_content"
+            android:layout_width="@dimen/progress_width"
+            android:layout_height="@dimen/progress_height"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/main_msg_paddingTop"
+            android:paddingBottom="@dimen/main_msg_paddingBottom">
+            <TextView
+                android:id="@+id/main_msg"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/choose_video" />
-
-            <Button
-                android:id="@+id/btnUpload"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/upload" />
+                android:text=""
+                />
         </LinearLayout>
         <RelativeLayout
             android:id="@+id/drawTopView"
@@ -48,5 +44,42 @@
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:layout_width="@dimen/progress_width"
+            android:layout_height="@dimen/progress_height"
+            android:orientation="vertical">
+            <ProgressBar
+                android:id="@+id/upload_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progress="0" />
+            <TextView
+                android:id="@+id/upload_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnChoose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_video" />
+
+            <Button
+                android:id="@+id/btnUpload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/upload" />
+        </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

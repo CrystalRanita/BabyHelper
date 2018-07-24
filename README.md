@@ -4,13 +4,12 @@
   1. Upload video and txt to MySQL server by php.
   2. Implement OpenCV functions.
 
-# APP SDK
-  https://github.com/gotev/android-upload-service
-
 # Reference
+  Android upload:
   Use OkHttp3 to set response timeout for run php exec neew to wait for a long period.
-  https://github.com/henrymorgen/android-okhttp3
+  https://github.com/lizhangqu/CoreProgress
 
+  DB and Php setup:
   Android Upload Image using Android Upload Service, author: Belal Khan.
   https://www.simplifiedcoding.net/android-upload-image-to-server/
   This is perfect material to learn how to upload file.
