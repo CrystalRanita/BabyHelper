@@ -12,74 +12,80 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <LinearLayout
-            android:gravity="center_horizontal"
-            android:layout_width="@dimen/progress_width"
-            android:layout_height="@dimen/progress_height"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/main_msg_paddingTop"
-            android:paddingBottom="@dimen/main_msg_paddingBottom">
-            <TextView
-                android:id="@+id/main_msg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                />
-        </LinearLayout>
         <RelativeLayout
             android:id="@+id/drawTopView"
             android:layout_height="@dimen/drawView_height"
             android:layout_width="@dimen/drawView_width"
+            android:layout_marginTop="@dimen/normal_padding"
             android:background="@android:color/background_dark">
             <ImageView
                 android:id="@+id/drawImg"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
             <com.ranita.babyhelper.DragRectView
                 android:id="@+id/dragRect"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
         <LinearLayout
             android:gravity="center_horizontal"
-            android:layout_width="@dimen/progress_width"
-            android:layout_height="@dimen/progress_height"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tools_height"
+            android:orientation="vertical" >
             <ProgressBar
                 android:id="@+id/upload_progress"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/progress_width"
                 android:layout_height="wrap_content"
+                android:paddingTop="@dimen/normal_padding"
                 android:max="100"
                 android:progress="0" />
             <TextView
                 android:id="@+id/upload_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text=""
                 />
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btn_video"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/choose_video"
+                    android:drawableTop="@drawable/video"
+                    android:layout_margin="@dimen/normal_padding"
+                    android:background="@android:color/transparent" />
+                <Button
+                    android:id="@+id/btn_analyse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/analyse"
+                    android:textSize="@dimen/normal_fontSize"
+                    android:drawableTop="@drawable/analyse"
+                    android:layout_marginRight="@dimen/normal_btn_margin_horizontal"
+                    android:layout_marginLeft="@dimen/normal_btn_margin_horizontal"
+                    android:layout_marginTop="@dimen/normal_padding"
+                    android:layout_marginBottom="@dimen/normal_padding"
+                    android:background="@android:color/transparent" />
+                <Button
+                    android:id="@+id/btn_reselect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reselect"
+                    android:drawableTop="@drawable/reselect"
+                    android:layout_margin="@dimen/normal_padding"
+                    android:background="@android:color/transparent" />
+            </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:gravity="center_horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnChoose"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/choose_video" />
-
-            <Button
-                android:id="@+id/btnUpload"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/upload" />
-        </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

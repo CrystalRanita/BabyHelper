@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:drawable="@mipmap/video"
+        android:layout_margin="@dimen/normal_padding"
+        android:width="@dimen/normal_btn_icon_size"
+        android:height="@dimen/normal_btn_icon_size" />
+</layer-list >

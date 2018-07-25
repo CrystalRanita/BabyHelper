@@ -19,10 +19,14 @@
     <string name="ok">確定</string>
     <string name="cancel">取消</string>
     <string name="upload">上傳</string>
-    <string name="choose_video">選擇影像檔</string>
+    <string name="reselect">重選</string>
+    <string name="choose_video">影像</string>
     <string name="uploading">影像上傳中</string>
     <string name="upload_finished">影像上傳完成</string>
-    <string name="analyse">影像分析</string>
+    <string name="analyse">分析</string>
     <string name="analysing">影像分析中......</string>
     <string name="analysing_result">分析結果</string>
+    <string name="analyse_success">分析成功</string>
+    <string name="analyse_failed">分析失敗</string>
+    <string name="check_net">連線失敗！請檢查網路或IP。</string>
 </resources>

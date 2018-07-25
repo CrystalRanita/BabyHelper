@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity
 
     private Button btnChoose;
     private Button btnUpload;
+    private Button btnReselect;
     private EditText ipEditText;
     private EditText userEditText;
     private NavigationView nvView;
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity
     private RelativeLayout mDrawAreaLayout;
     private ProgressBar mUploadProgressBar;
     private TextView mUpload_info;
+    private AlertDialog mLoadingDialog;
 
     private Uri mFilePath;
     AndroidFrameConverter mAndroidConverter = new AndroidFrameConverter();
@@ -104,8 +107,9 @@ public class MainActivity extends AppCompatActivity
         requestStoragePermission();
         initOkHttpClient();
 
-        btnChoose = (Button) findViewById(R.id.btnChoose);
-        btnUpload = (Button) findViewById(R.id.btnUpload);
+        btnChoose = (Button) findViewById(R.id.btn_video);
+        btnUpload = (Button) findViewById(R.id.btn_analyse);
+        btnReselect = (Button) findViewById(R.id.btn_reselect);
 
         ipEditText = (EditText) findViewById(R.id.ipEditText);
         userEditText = (EditText) findViewById(R.id.userEditText);
@@ -130,6 +134,12 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 sendVideo();
+            }
+        });
+        btnReselect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            reselectArea();
             }
         });
 
@@ -171,7 +181,7 @@ public class MainActivity extends AppCompatActivity
                 }
             });
         }
-
+        cleanupArea();
         // Example of a call to a native method
         // TextView tv = (TextView) findViewById(R.id.sample_text);
         // tv.setText(stringFromJNI());
@@ -218,6 +228,21 @@ public class MainActivity extends AppCompatActivity
                 .setNegativeButton(R.string.cancel, null);
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void displayLoadingDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View view = inflater.inflate(R.layout.dialog_loading, null);
+        dialog.setView(view);
+        mLoadingDialog = dialog.create();
+        mLoadingDialog.show();
+    }
+
+    private void hideLoadingDialog() {
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -294,7 +319,7 @@ public class MainActivity extends AppCompatActivity
 
         try {
             String uploadId = UUID.randomUUID().toString();
-            Request.Builder request = new Request.Builder();
+            final Request.Builder request = new Request.Builder();
             request.header("Authorization", "Client-ID " + uploadId);
             request.url(UPLOAD_URL);
 
@@ -314,7 +339,7 @@ public class MainActivity extends AppCompatActivity
                 public void onUIProgressStart(long totalBytes) {
                     super.onUIProgressStart(totalBytes);
                     Log.e("TAG", "onUIProgressStart:" + totalBytes);
-                    Toast.makeText(getApplicationContext(), "开始上传：" + totalBytes, Toast.LENGTH_SHORT).show();
+                    ThreadToast(getText(R.string.uploading));
                 }
 
                 @Override
@@ -334,7 +359,8 @@ public class MainActivity extends AppCompatActivity
                 public void onUIProgressFinish() {
                     super.onUIProgressFinish();
                     Log.e("TAG", "onUIProgressFinish:");
-                    Toast.makeText(getApplicationContext(), "结束上传", Toast.LENGTH_SHORT).show();
+                    ThreadToast(getText(R.string.upload_finished));
+                    displayLoadingDialog();
                 }
             });
             request.post(requestBody);
@@ -344,16 +370,55 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onFailure(Call call, IOException e) {
                     Log.i(TAG, "sendVideo onFailure: " +e.toString());
+                    String errMsg = e.toString();
+                    // java.net.ConnectException: Failed to connect to
+                    if (errMsg.contains("Failed to connect")) {
+                        ThreadToast(getText(R.string.check_net));
+                    }
                 }
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    Log.i(TAG, "sendVideo: " + response.body().string());
+                    Log.i(TAG, "onResponse");
+                    String result = response.body().string();
+                    Log.i(TAG, "onResponse result: " + result);
+                    hideLoadingDialog();
+                    if (result != null) {
+                        if (result.contains("result success")) {
+                            ThreadToast(getText(R.string.analyse_success));
+                            return;
+                        }
+                    }
+                    ThreadToast(getText(R.string.analyse_failed));
                 }
             });
         } catch (Exception ex) {
-            Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), ex.toString(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /*
+    * Fix java.lang.RuntimeException:
+    * Can't create handler inside thread that has not called Looper.prepare()
+    * */
+    private void ThreadToast(final CharSequence msg) {
+        new Thread() {
+            public void run() {
+                Looper.prepare();
+                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }
+        }.start();
+    }
+
+
+        private void cleanupArea() {
+        Constants.resetAllPotition(mContext);
+        Constants.setBoolSharedPref(Constants.RGB_SET_ALL, false, mContext);
+    }
+
+    private void reselectArea() {
+        getFrame();
     }
 
     private String createVideoInfoFile(String filename, String content) {
@@ -474,12 +539,12 @@ public class MainActivity extends AppCompatActivity
         originalBitmap.setHeight(mVideoHeight);
         mDrawImg.setImageDrawable(new BitmapDrawable(getResources(), originalBitmap));
 
-        ViewGroup.LayoutParams drawViewParams=mDrawAreaLayout.getLayoutParams();
-        drawViewParams.width = mVideoWidth;
-        drawViewParams.height = mVideoHeight;
-        mDrawAreaLayout.setLayoutParams(drawViewParams);
+//        ViewGroup.LayoutParams drawViewParams=mDrawAreaLayout.getLayoutParams();
+//        drawViewParams.width = mVideoWidth;
+//        drawViewParams.height = mVideoHeight;
+//        mDrawAreaLayout.setLayoutParams(drawViewParams);
 
-        ViewGroup.LayoutParams drawAreaParams=mDragRectView.getLayoutParams();
+        ViewGroup.LayoutParams drawAreaParams = mDragRectView.getLayoutParams();
         drawAreaParams.width = mVideoWidth;
         drawAreaParams.height = mVideoHeight;
         mDragRectView.setLayoutParams(drawAreaParams);
@@ -501,11 +566,12 @@ public class MainActivity extends AppCompatActivity
 
     private void getFrame() {
         try {
-            Constants.resetAllPotition(mContext);
-            Constants.setBoolSharedPref(Constants.RGB_SET_ALL, false, mContext);
-            String path = trimStart(mFilePath.getPath(), "/file");
-            Log.i(TAG ,"filePath: " + mFilePath);
-            fetchFrame(path);
+            cleanupArea();
+            if (mFilePath != null) {
+                String path = trimStart(mFilePath.getPath(), "/file");
+                Log.i(TAG, "filePath: " + mFilePath);
+                fetchFrame(path);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

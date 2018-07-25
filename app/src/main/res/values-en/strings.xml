@@ -19,10 +19,14 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="upload">Upload</string>
-    <string name="choose_video">Select Video</string>
+    <string name="reselect">Reselect</string>
+    <string name="choose_video">Video</string>
     <string name="uploading">Video uploading.</string>
     <string name="upload_finished">Upload finished.</string>
-    <string name="analyse">Video Analysing</string>
+    <string name="analyse">Analyse</string>
     <string name="analysing">Analysing...</string>
     <string name="analysing_result">Analysing Result:</string>
+    <string name="analyse_success">Analysing Success!</string>
+    <string name="analyse_failed">Analysing Failed!</string>
+    <string name="check_net">cannot connect! Please check network or IP!</string>
 </resources>
