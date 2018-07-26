@@ -230,6 +230,16 @@ public class MainActivity extends AppCompatActivity
         dialog.show();
     }
 
+    private void displayAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View view = inflater.inflate(R.layout.dialog_about, null);
+        builder.setView(view);
+        builder.setPositiveButton(R.string.ok, null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     private void displayLoadingDialog() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
         LayoutInflater inflater = getLayoutInflater();
@@ -254,7 +264,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_settings) {
             displaySettingsDialog();
         } else if (id == R.id.nav_about) {
-
+            displayAboutDialog();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

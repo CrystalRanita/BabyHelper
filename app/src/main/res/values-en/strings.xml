@@ -29,4 +29,6 @@
     <string name="analyse_success">Analysing Success!</string>
     <string name="analyse_failed">Analysing Failed!</string>
     <string name="check_net">cannot connect! Please check network or IP!</string>
+    <string name="about">NTUT Electro-Medical Engineering Lab. research and development</string>
+    <string name="img_source">Icon made by Freepik from www.flaticon.com</string>
 </resources>

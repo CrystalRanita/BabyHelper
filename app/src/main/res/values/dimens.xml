@@ -17,6 +17,8 @@
     <dimen name="normal_btn_padding_left">30dp</dimen>
     <dimen name="normal_btn_margin_horizontal">30dp</dimen>
     <dimen name="repeat_progress_size">30dp</dimen>
+    <dimen name="about_text_padding">30dp</dimen>
     <!-- FontSize -->
     <dimen name="normal_fontSize">14sp</dimen>
+    <dimen name="about_fontSize">18sp</dimen>
 </resources>
