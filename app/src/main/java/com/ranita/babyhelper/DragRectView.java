@@ -96,7 +96,7 @@ public class DragRectView extends View{
             case MotionEvent.ACTION_UP:
                 if (mCallback != null) {
                     mCallback.onRectFinished(new Rect(Math.min(mStartX, mEndX), Math.min(mStartY, mEndY),
-                            Math.max(mEndX, mStartX), Math.max(mEndY, mStartX)));
+                            Math.max(mEndX, mStartX), Math.max(mEndY, mStartY)));
                 }
                 invalidate();
                 break;
