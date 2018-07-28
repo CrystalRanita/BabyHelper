@@ -7,14 +7,12 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Looper;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -209,6 +207,20 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    private void displayReportDialog(String result) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View view = inflater.inflate(R.layout.dialog_report, null);
+        builder.setView(view);
+        final TextView report_text = (TextView) view.findViewById(R.id.report_text);
+        report_text.setText(result);
+        builder.setPositiveButton(R.string.ok, null);
+        AlertDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
     private void displaySettingsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         LayoutInflater inflater = getLayoutInflater();
@@ -230,6 +242,8 @@ public class MainActivity extends AppCompatActivity
         })
                 .setNegativeButton(R.string.cancel, null);
         AlertDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
         dialog.show();
     }
 
@@ -240,15 +254,19 @@ public class MainActivity extends AppCompatActivity
         builder.setView(view);
         builder.setPositiveButton(R.string.ok, null);
         AlertDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
         dialog.show();
     }
 
     private void displayLoadingDialog() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         LayoutInflater inflater = getLayoutInflater();
         final View view = inflater.inflate(R.layout.dialog_loading, null);
-        dialog.setView(view);
-        mLoadingDialog = dialog.create();
+        builder.setView(view);
+        mLoadingDialog = builder.create();
+        mLoadingDialog.setCanceledOnTouchOutside(false);
+        mLoadingDialog.setCancelable(false);
         mLoadingDialog.show();
     }
 
@@ -388,6 +406,7 @@ public class MainActivity extends AppCompatActivity
                     if (result != null) {
                         if (result.contains("result success")) {
                             ThreadToast(getText(R.string.analyse_success));
+                            ThreadReportDialog(getText(R.string.analyse_success).toString());
                             return;
                         }
                     }
@@ -413,8 +432,18 @@ public class MainActivity extends AppCompatActivity
         }.start();
     }
 
+    private void ThreadReportDialog(final String result) {
+        new Thread() {
+            public void run() {
+                Looper.prepare();
+                displayReportDialog(result);
+                Looper.loop();
+            }
+        }.start();
+    }
 
-        private void cleanupArea() {
+
+    private void cleanupArea() {
         Constants.resetAllPotition(mContext);
         Constants.setBoolSharedPref(Constants.RGB_SET_ALL, false, mContext);
     }

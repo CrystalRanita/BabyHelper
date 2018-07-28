@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="@dimen/report_width"
+        android:layout_height="@dimen/report_height"
+        android:orientation="vertical" >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/report"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_margin="@dimen/normal_padding"
+            android:textSize="@dimen/about_fontSize"
+            android:text="@string/analysing_result" />
+        <TextView
+            android:id="@+id/report_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_margin="@dimen/normal_padding"
+            android:paddingTop="@dimen/about_text_padding"
+            android:textSize="@dimen/normal_fontSize"
+            android:text="" />
+    </LinearLayout>
+</LinearLayout>
