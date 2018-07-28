@@ -4,14 +4,17 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Looper;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -78,8 +81,7 @@ public class MainActivity extends AppCompatActivity
     private ProgressBar mUploadProgressBar;
     private TextView mUpload_info;
     private AlertDialog mLoadingDialog;
-
-    private Uri mFilePath;
+    private String mFilePath;
     AndroidFrameConverter mAndroidConverter = new AndroidFrameConverter();
 
     private double mW_RealRatio = 0;
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mContext = getApplicationContext();
         requestStoragePermission();
         initOkHttpClient();
@@ -272,14 +275,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
     // End Nav
-    // remove trimStart
-    public String trimStart(String oriStr, String removeStr) {
-        String result = oriStr;
-        if (oriStr.indexOf(removeStr) == 0) {
-            result = oriStr.substring(removeStr.length());
-        }
-        return result;
-    }
 
     private void selectVideo() {
         Intent selectIntent = new Intent();
@@ -299,12 +294,9 @@ public class MainActivity extends AppCompatActivity
             return;
         }
 
-        String path = trimStart(mFilePath.getPath(), "/file");
-
         Log.i(TAG ,"name: " + name);
         //getting the actual path of the image
         Log.i(TAG ,"filePath: " + mFilePath);
-        Log.i(TAG ,"URI path: " + path);
         Log.i(TAG ,"info_path: " + info_path);
 
         if ((ip == null) || (ip == "")) {
@@ -317,7 +309,7 @@ public class MainActivity extends AppCompatActivity
             return;
         }
 
-        if ((path == null) || (path == "")) {
+        if ((mFilePath == null) || (mFilePath == "")) {
             Toast.makeText(this, R.string.video_file_not_found, Toast.LENGTH_LONG).show();
             return;
         }
@@ -335,8 +327,8 @@ public class MainActivity extends AppCompatActivity
 
             MultipartBody.Builder requestBodyBuilder = new MultipartBody.Builder();
             requestBodyBuilder.setType(MultipartBody.FORM);
-            requestBodyBuilder.addFormDataPart("video", path,
-                            RequestBody.create(MEDIA_TYPE_MP4, new File(path)));
+            requestBodyBuilder.addFormDataPart("video", mFilePath,
+                            RequestBody.create(MEDIA_TYPE_MP4, new File(mFilePath)));
             requestBodyBuilder.addFormDataPart("txt", info_path,
                             RequestBody.create(MEDIA_TYPE_TXT, new File(info_path)));
             requestBodyBuilder.addFormDataPart("upload_user_name", name);
@@ -458,7 +450,8 @@ public class MainActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == Constants.REQ_CHOOSE_VIDEO && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            mFilePath = data.getData();
+            Uri pathUri = data.getData();
+            mFilePath = PathUtil.getPath(getApplicationContext(), pathUri);
             getFrame();
         }
     }
@@ -536,7 +529,7 @@ public class MainActivity extends AppCompatActivity
 
             if (detected_frame.image != null) {
                 i++;
-                Log.i(TAG, "frame i: " + i);
+                // Log.i(TAG, "frame i: " + i);
             }
         }
 
@@ -577,10 +570,12 @@ public class MainActivity extends AppCompatActivity
     private void getFrame() {
         try {
             cleanupArea();
-            if (mFilePath != null) {
-                String path = trimStart(mFilePath.getPath(), "/file");
-                Log.i(TAG, "filePath: " + mFilePath);
-                fetchFrame(path);
+            Log.i(TAG, "filePath: " + mFilePath);
+            if ((mFilePath == null) || (mFilePath == "")) {
+                Toast.makeText(this, R.string.video_file_not_found, Toast.LENGTH_LONG).show();
+                return;
+            } else {
+                fetchFrame(mFilePath);
             }
         } catch (Exception e) {
             e.printStackTrace();
