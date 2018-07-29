@@ -232,7 +232,9 @@ public class MainActivity extends AppCompatActivity
                 WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                 wifiManager.setWifiEnabled(true);
                 if (isNetConnected()) {
-                    sendVideo();
+                    if (isSendVideo) {
+                        sendVideo();
+                    }
                 } else {
                     requiredWifiDialog(isSendVideo);
                 }
