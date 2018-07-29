@@ -9,4 +9,5 @@ app/app.iml
 openCVLibrary341/openCVLibrary341.iml
 BabyHelper.iml
 local.properties
+gradle.properties
 tools/BabyHelperSign
