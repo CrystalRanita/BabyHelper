@@ -17,6 +17,40 @@ android {
             }
         }
     }
+    packagingOptions {
+        exclude 'org/bytedeco/javacpp/windows-x86/*.dll'
+        exclude 'org/bytedeco/javacpp/windows-x86_64/*.dll'
+        exclude 'org/bytedeco/javacpp/windows-x86/lib/*.lib'
+        exclude 'org/bytedeco/javacpp/windows-x86_64/lib/*.lib'
+        exclude 'org/bytedeco/javacpp/windows-x86/include/opencv2/*.hpp'
+        exclude 'org/bytedeco/javacpp/windows-x86_64/include/opencv2/*.hpp'
+        exclude 'org/bytedeco/javacpp/windows-x86/include/opencv2/core/*.hpp'
+        exclude 'org/bytedeco/javacpp/windows-x86_64/include/opencv2/core/*.hpp'
+        exclude 'org/bytedeco/javacpp/windows-x86/include/opencv2/core/*.h'
+        exclude 'org/bytedeco/javacpp/windows-x86_64/include/opencv2/core/*.h'
+        exclude 'org/bytedeco/javacpp/ios-arm64/libopencv*'
+        exclude 'org/bytedeco/javacpp/ios-x86_64/libopencv*'
+        exclude 'org/bytedeco/javacpp/ios-arm64/include/opencv2/*.hpp'
+        exclude 'org/bytedeco/javacpp/ios-x86_64/include/opencv2/*.hpp'
+        exclude 'org/bytedeco/javacpp/ios-arm64/include/opencv2/core/*.hpp'
+        exclude 'org/bytedeco/javacpp/ios-x86_64/include/opencv2/core/*.hpp'
+        exclude 'org/bytedeco/javacpp/ios-arm64/include/opencv2/core/*.h'
+        exclude 'org/bytedeco/javacpp/ios-x86_64/include/opencv2/core/*.h'
+        exclude 'org/bytedeco/javacpp/ios-arm64/*.o'
+        exclude 'org/bytedeco/javacpp/ios-x86_64/*.o'
+        exclude 'org/bytedeco/javacpp/ios-arm64/*.a'
+        exclude 'org/bytedeco/javacpp/ios-x86_64/*.a'
+        exclude 'org/bytedeco/javacpp/linux-armhf/libopencv*'
+        exclude 'org/bytedeco/javacpp/linux-ppc64le/libopencv*'
+        exclude 'org/bytedeco/javacpp/linux-x86/libopencv*'
+        exclude 'org/bytedeco/javacpp/linux-x86_64/libopencv*'
+        exclude 'org/bytedeco/javacpp/macosx-x86_64/*.dylib'
+        exclude 'org/bytedeco/javacpp/macosx-x86_64/include/opencv2/*.hpp'
+        exclude 'org/bytedeco/javacpp/macosx-x86_64/include/opencv2/core/*.hpp'
+        exclude 'org/bytedeco/javacpp/macosx-x86_64/include/opencv2/core/*.h'
+        exclude 'org/bytedeco/javacpp/macosx-x86_64/include/opencv2/core/cuda/*.hpp'
+        exclude 'org/bytedeco/javacpp/macosx-x86_64/include/opencv2/core/cuda/*.h'
+    }
     signingConfigs {
        release {
            storeFile file(RELEASE_STORE_FILE)
@@ -70,10 +104,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation project(':openCVLibrary341')
+    // implementation project(':openCVLibrary341')
     implementation group: 'org.bytedeco', name: 'javacv', version: '1.4.1'
     implementation group: 'org.bytedeco.javacpp-presets', name: 'opencv-platform', version: '3.4.1-1.4.1'
-    implementation group: 'org.bytedeco.javacpp-presets', name: 'ffmpeg-platform', version: '3.4.1-1.4'
+    implementation group: 'org.bytedeco.javacpp-presets', name: 'ffmpeg', version: '3.4.1-1.4', classifier: 'android-arm'
+    implementation group: 'org.bytedeco.javacpp-presets', name: 'ffmpeg', version: '3.4.1-1.4', classifier: 'android-x86'
 
     implementation 'io.github.lizhangqu:coreprogress:1.0.2'
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'

@@ -8,8 +8,6 @@
     <string name="chk_storage_failed">使用此應用必須先允許儲存權限！</string>
     <string name="navigation_drawer_open">開啟選單</string>
     <string name="navigation_drawer_close">關閉選單</string>
-    <string name="nav_header_title">您好,</string>
-    <string name="nav_header_subtitle">歡迎使用</string>
     <string name="nav_header_desc">寶寶幫手</string>
     <string name="action_settings">設定</string>
     <string name="action_about">關於</string>
@@ -18,7 +16,6 @@
     <string name="input_info">請輸入資訊</string>
     <string name="ok">確定</string>
     <string name="cancel">取消</string>
-    <string name="upload">上傳</string>
     <string name="reselect">重選</string>
     <string name="choose_video">影像</string>
     <string name="uploading">影像上傳中</string>

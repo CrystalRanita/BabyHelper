@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
     <ProgressBar
-        android:id="@+id/loading"
         android:layout_width="@dimen/repeat_progress_size"
         android:layout_height="@dimen/repeat_progress_size"
         android:layout_gravity="center_horizontal"

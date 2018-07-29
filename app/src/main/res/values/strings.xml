@@ -8,8 +8,6 @@
     <string name="chk_storage_failed">Please allow enable storage permission before using app!</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Hi!</string>
-    <string name="nav_header_subtitle">Welcome!</string>
     <string name="nav_header_desc">Baby Helper</string>
     <string name="action_settings">Settings</string>
     <string name="action_about">About</string>
@@ -18,7 +16,6 @@
     <string name="input_info">Please input information</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    <string name="upload">Upload</string>
     <string name="reselect">Reselect</string>
     <string name="choose_video">Video</string>
     <string name="uploading">Video uploading.</string>

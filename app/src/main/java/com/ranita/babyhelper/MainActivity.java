@@ -14,7 +14,6 @@ import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Environment;
 import android.os.Looper;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -142,6 +141,8 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 if (!isNetConnected()) {
                     requiredWifiDialog(true);
+                } else {
+                    sendVideo();
                 }
             }
         });
