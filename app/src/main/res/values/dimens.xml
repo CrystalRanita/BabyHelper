@@ -20,6 +20,8 @@
     <dimen name="about_text_padding">30dp</dimen>
     <dimen name="report_height">400dp</dimen>
     <dimen name="report_width">300dp</dimen>
+    <dimen name="wifi_height">250dp</dimen>
+    <dimen name="wifi_width">300dp</dimen>
     <!-- FontSize -->
     <dimen name="normal_fontSize">14sp</dimen>
     <dimen name="about_fontSize">18sp</dimen>

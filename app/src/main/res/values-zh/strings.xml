@@ -31,4 +31,5 @@
     <string name="check_net">連線失敗！請檢查網路或IP。</string>
     <string name="about">北科大醫電工程實驗室研發</string>
     <string name="img_source">圖片由 Freepik 製作，來自 www.flaticon.com</string>
+    <string name="require_wifi">請開啟 Wi-Fi</string>
 </resources>

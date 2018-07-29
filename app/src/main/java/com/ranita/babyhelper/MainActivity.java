@@ -11,8 +11,10 @@ import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Environment;
 import android.os.Looper;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -105,7 +107,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mContext = getApplicationContext();
+        if (!isNetConnected()) {
+            requiredWifiDialog(false);
+        }
         requestStoragePermission();
+
         initOkHttpClient();
 
         btnChoose = (Button) findViewById(R.id.btn_video);
@@ -134,7 +140,9 @@ public class MainActivity extends AppCompatActivity
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendVideo();
+                if (!isNetConnected()) {
+                    requiredWifiDialog(true);
+                }
             }
         });
         btnReselect.setOnClickListener(new View.OnClickListener() {
@@ -188,6 +196,12 @@ public class MainActivity extends AppCompatActivity
         // tv.setText(stringFromJNI());
     }
 
+    private boolean isNetConnected() {
+        WifiManager wifi = (WifiManager)getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        boolean result = wifi.isWifiEnabled();
+        return result;
+    }
+
     private void initOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .connectTimeout(15, TimeUnit.SECONDS)
@@ -205,6 +219,37 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void requiredWifiDialog(final Boolean isSendVideo) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View view = inflater.inflate(R.layout.dialog_wifi, null);
+        builder.setView(view);
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(true);
+                if (isNetConnected()) {
+                    sendVideo();
+                } else {
+                    requiredWifiDialog(isSendVideo);
+                }
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                if (!isSendVideo) {
+                    finish();
+                }
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        dialog.show();
     }
 
     private void displayReportDialog(String result) {
